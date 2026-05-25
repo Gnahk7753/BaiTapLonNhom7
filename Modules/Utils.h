@@ -10,6 +10,12 @@ void gotoxy(int x, int y);
 //Tạo nơi chứa dữ liệu Tỉnh Thành
 void createProvinceFolder();
 
+//Tạo nơi chứa FloorList
+void createFloorList();
+
+//Tạo nơi chứa Bill
+void createBill();
+
 //Kiểm tra folder Data có tồn tại không, nếu không thì tạo
 void createDataFolder();
 
@@ -18,6 +24,12 @@ int utf8len(const char *s);
 
 //Hàm hiển thị menu và điều hướng mũi tên để chọn
 int menuLogin(char *items[], int size);
+
+//Ẩn con trỏ
+void hideCursor();
+
+//Hiện con trỏ
+void showCursor();
 
 //Lưu lịch sử thay đổi
 void saveHistory(char role[], char status[], char action[], char target[]);

@@ -12,6 +12,7 @@
 #define KEY_DOWN 80
 #define BACKSPACE 8
 #define ENTER 13
+#define ESC 27
 
 //In chữ LOGIN ADMIN
 void printAdminBanner() {
@@ -24,8 +25,31 @@ void printAdminBanner() {
     printf("╚══════╝ ╚═════╝  ╚═════╝ ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝\n\n\n");
 }
 
+//In chữ LOGIN MANAGE
+void printManageBanner() {
+    printf("\n");
+    printf("██╗      ██████╗  ██████╗ ██╗███╗   ██╗    ███╗   ███╗ █████╗ ███╗   ██╗ █████╗  ██████╗ ███████╗\n");
+    printf("██║     ██╔═══██╗██╔════╝ ██║████╗  ██║    ████╗ ████║██╔══██╗████╗  ██║██╔══██╗██╔════╝ ██╔════╝\n");
+    printf("██║     ██║   ██║██║  ███╗██║██╔██╗ ██║    ██╔████╔██║███████║██╔██╗ ██║███████║██║  ███╗█████╗  \n");
+    printf("██║     ██║   ██║██║   ██║██║██║╚██╗██║    ██║╚██╔╝██║██╔══██║██║╚██╗██║██╔══██║██║   ██║██╔══╝  \n");
+    printf("███████╗╚██████╔╝╚██████╔╝██║██║ ╚████║    ██║ ╚═╝ ██║██║  ██║██║ ╚████║██║  ██║╚██████╔╝███████╗\n");
+    printf("╚══════╝ ╚═════╝  ╚═════╝ ╚═╝╚═╝  ╚═══╝    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝\n\n\n");
+}
+
+//In chữ LOGIN RESIDENT
+void printResidentBanner() {
+    printf("\n");
+    printf("██╗      ██████╗  ██████╗ ██╗███╗   ██╗    ██████╗ ███████╗███████╗██╗██████╗ ███████╗███╗   ██╗████████╗\n");
+    printf("██║     ██╔═══██╗██╔════╝ ██║████╗  ██║    ██╔══██╗██╔════╝██╔════╝██║██╔══██╗██╔════╝████╗  ██║╚══██╔══╝\n");
+    printf("██║     ██║   ██║██║  ███╗██║██╔██╗ ██║    ██████╔╝█████╗  ███████╗██║██║  ██║█████╗  ██╔██╗ ██║   ██║   \n");
+    printf("██║     ██║   ██║██║   ██║██║██║╚██╗██║    ██╔══██╗██╔══╝  ╚════██║██║██║  ██║██╔══╝  ██║╚██╗██║   ██║   \n");
+    printf("███████╗╚██████╔╝╚██████╔╝██║██║ ╚████║    ██║  ██║███████╗███████║██║██████╔╝███████╗██║ ╚████║   ██║   \n");
+    printf("╚══════╝ ╚═════╝  ╚═════╝ ╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝   \n\n\n");
+}
+
 //In chữ HELLO ADMIN
 void helloAdmin() {
+    printf("\n");
     printf("██╗  ██╗███████╗██╗     ██╗      ██████╗      █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗\n");
     printf("██║  ██║██╔════╝██║     ██║     ██╔═══██╗    ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║\n");
     printf("███████║█████╗  ██║     ██║     ██║   ██║    ███████║██║  ██║██╔████╔██║██║██╔██╗ ██║\n");
@@ -34,10 +58,32 @@ void helloAdmin() {
     printf("╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ ╚═════╝     ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝\n\n\n");
 }
 
-//Hàm vẽ giao diện login
+//In chữ HELLO MANAGE
+void printHelloManage() {
+    printf("\n");
+    printf("██╗  ██╗███████╗██╗     ██╗      ██████╗     ███╗   ███╗ █████╗ ███╗   ██╗ █████╗  ██████╗ ███████╗\n");
+    printf("██║  ██║██╔════╝██║     ██║     ██╔═══██╗    ████╗ ████║██╔══██╗████╗  ██║██╔══██╗██╔════╝ ██╔════╝\n");
+    printf("███████║█████╗  ██║     ██║     ██║   ██║    ██╔████╔██║███████║██╔██╗ ██║███████║██║  ███╗█████╗  \n");
+    printf("██╔══██║██╔══╝  ██║     ██║     ██║   ██║    ██║╚██╔╝██║██╔══██║██║╚██╗██║██╔══██║██║   ██║██╔══╝  \n");
+    printf("██║  ██║███████╗███████╗███████╗╚██████╔╝    ██║ ╚═╝ ██║██║  ██║██║ ╚████║██║  ██║╚██████╔╝███████╗\n");
+    printf("╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ ╚═════╝     ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝\n\n\n");
+}
+
+//In chữ HELLO RESIDENT
+void printHelloResident() {
+    printf("\n");
+    printf("██╗  ██╗███████╗██╗     ██╗      ██████╗     ██████╗ ███████╗███████╗██╗██████╗ ███████╗███╗   ██╗████████╗\n");
+    printf("██║  ██║██╔════╝██║     ██║     ██╔═══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔══██╗██╔════╝████╗  ██║╚══██╔══╝\n");
+    printf("███████║█████╗  ██║     ██║     ██║   ██║    ██████╔╝█████╗  ███████╗██║██║  ██║█████╗  ██╔██╗ ██║   ██║   \n");
+    printf("██╔══██║██╔══╝  ██║     ██║     ██║   ██║    ██╔══██╗██╔══╝  ╚════██║██║██║  ██║██╔══╝  ██║╚██╗██║   ██║   \n");
+    printf("██║  ██║███████╗███████╗███████╗╚██████╔╝    ██║  ██║███████╗███████║██║██████╔╝███████╗██║ ╚████║   ██║   \n");
+    printf("╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ ╚═════╝     ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝   \n\n\n");
+}
+
+//Hàm vẽ giao diện đăng nhập
 void printLoginForm(char username[], char password[], int currentField) {
 
-    /// Ô tài khoản
+    //Ô tài khoản
     if(currentField == 0) {
         setColor(11);
         printf("   >> Tài Khoản: %s\n", username);
@@ -46,7 +92,7 @@ void printLoginForm(char username[], char password[], int currentField) {
         printf("      Tài Khoản: %s\n", username);
     }
 
-    /// Ô mật khẩu
+    //Ô mật khẩu
     if(currentField == 1) {
         setColor(11);
         printf("   >> Mật khẩu : %s\n", password);
@@ -56,7 +102,8 @@ void printLoginForm(char username[], char password[], int currentField) {
     }
 
     //Hướng dẫn
-    printf("\nMũi tên LÊN/XUỐNG để di chuyển\n");
+    printf("\nNhấn ▲ ▼ để di chuyển\n");
+    printf("Nhấp Esc để thoát\n");
 
     //Đưa con trỏ tới vị trí nhập
     if(currentField == 0) {
@@ -67,7 +114,7 @@ void printLoginForm(char username[], char password[], int currentField) {
     }
 }
 
-//Hàm kiểm tra tài khoản và mật khẩu trả về 1 nếu đúng và 0 nếu sai
+//Hàm kiểm tra tài khoản và mật khẩu Admin trả về 1 nếu đúng và 0 nếu sai
 int checkLoginAdmin(char username[], char password[]) {
 
     //Tạo đường dẫn đầy đủ đến file tài khoản Admin
@@ -99,9 +146,87 @@ int checkLoginAdmin(char username[], char password[]) {
     return 0;
 }
 
-//Đăng nhập với tư cách Admin
-void loginAdmin() {
+//Hàm kiểm tra tài khoản và mật khẩu Manage trả về 1 nếu đúng và 0 nếu sai
+int checkLoginManage(char username[], char password[]) {
+
+    //Tạo đường dẫn đầy đủ đến file tài khoản Manage
+    char path[100];
+    sprintf(path, "Data/Account/Manage/%s.txt", username);
+
+    //Mở file
+    FILE *f = fopen(path, "r");
+
+    //Nếu file không tồn tại
+    if(f == NULL) {
+        return 0;
+    }
+
+    //Đọc mật khẩu dòng đầu tiên
+    char filePassword[50];
+    fgets(filePassword, sizeof(filePassword), f);
+
+    //Xóa ký tự xuống dòng '\n'
+    filePassword[strcspn(filePassword, "\n")] = '\0';
+
+    //Đóng file
+    fclose(f);
+
+    //So sánh mật khẩu
+    if(strcmp(password, filePassword) == 0) {
+        return 1;
+    }
+    return 0;
+}
+
+//Hàm kiểm tra tài khoản và mật khẩu Resident trả về 1 nếu đúng và 0 nếu sai
+int checkLoginResident(char username[], char password[]) {
+    char path[256];
+    char floorPath[256];
+    char roomPath[256];
+    char filePath[256];
+    char storedPass[50];
+
+    //Duyệt Floor1 -> Floor5
+    for (int floor = 1; floor <= 5; floor++) {
+        sprintf(floorPath, "FloorList/Floor%d", floor);
+
+        //Duyệt P101 -> P110
+        for (int room = 1; room <= 10; room++) {
+            int roomNumber = floor * 100 + room;
+            sprintf(roomPath, "%s/P%d", floorPath, roomNumber);
+
+            //File username.txt
+            sprintf(filePath, "%s/%s.txt", roomPath, username);
+
+            FILE *f = fopen(filePath, "r");
+            if (f != NULL) {
+                //Đọc mật khẩu dòng đầu
+                if (fgets(storedPass, sizeof(storedPass), f) != NULL) {
+                    //xoá \n nếu có
+                    storedPass[strcspn(storedPass, "\n")] = '\0';
+
+                    fclose(f);
+
+                    //So sánh mật khẩu
+                    if (strcmp(storedPass, password) == 0) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+
+                fclose(f);
+            }
+        }
+    }
+
+    return 0;
+}
+
+//Hàm đăng nhập
+void login(int select) {
     
+    char path[256];
     char username[50] = "", password[50] = "";
     int usernameLength = 0, passwordLength = 0;
     int currentField = 0, key;
@@ -115,8 +240,18 @@ void loginAdmin() {
         //Làm sạch màn hình
         system("cls");
 
-        //Vẽ giao diện
-        printAdminBanner();
+        //Vẽ giao diện theo lựa chọn đăng nhập
+        switch (select) {
+            case 0:
+                printAdminBanner();
+                break;
+            case 1:
+                printManageBanner();
+                break;
+            case 2:
+                printResidentBanner();
+                break;
+        }
 
         //In form đăng nhập
         printLoginForm(username, password, currentField);
@@ -148,27 +283,58 @@ void loginAdmin() {
             // Nếu đã nhập đủ
             if(strlen(username) > 0 && strlen(password) > 7) {
 
-                //Nếu đúng tài khoản và mật khẩu
-                if (checkLoginAdmin(username, password) == 1) {
+                //Kiểm tra mật khẩu theo giao diện đăng nhập
+                switch (select) {
+                    case 0:
+                        //Đúng tài khoản và mật khẩu
+                        if (checkLoginAdmin(username, password) == 1) {
+                            //Tạo path để lưu lịch sử đăng nhập
+                            sprintf(path, "Admin with the name '%s' has successfully logged in.", username);
+                            saveHistory("ADMIN", "SUCCESS", "LOGIN", path);
 
-                    //Tạo path để lưu lịch sử đăng nhập
-                    char path[256];
-                    sprintf(path, "Admin with the name '%s' has successfully logged in.", username);
-                    saveHistory("ADMIN", "SUCCESS", "LOGIN", path);
-                    printf("        Đăng nhập thành công");
-                    scanf("%s", &username);
-                } 
+                            //Chuyển sang các tính năng của admin
 
-                //Nếu sai tài khoản và mật khẩu
-                else {
+                        } 
+                        //Nếu sai tài khoản hoặc mật khẩu
+                        else {
+                            //Tạo path để lưu lịch sử đăng nhập
+                            sprintf(path, "The Admin with the name '%s' attempted to log in with the password '%s'.", username, password);
+                            saveHistory("ADMIN", "ERROR", "LOGIN", path);
+                        } break;
+                    case 1:
+                        //Đúng tài khoản và mật khẩu
+                        if (checkLoginManage(username, password) == 1) {
+                            //Tạo path để lưu lịch sử đăng nhập
+                            sprintf(path, "Manage with the name '%s' has successfully logged in.", username);
+                            saveHistory("MANAGE", "SUCCESS", "LOGIN", path);
 
-                    //Tạo path để lưu lịch sử đăng nhập
-                    char path[256];
-                    sprintf(path, "The user with the name '%s' attempted to log in with the password '%s'.", username, password);
-                    saveHistory("ADMIN", "ERROR", "LOGIN", path);
+                            //Chuyển sang các tính năng của quản lý
 
-                    printf("        Sai tài khoản hoặc mật khẩu");
-                    scanf("%s", &username);
+                        }
+                        //Nếu sai tài khoản hoặc mật khẩu
+                        else {
+                            //Tạo path để lưu lịch sử đăng nhập
+                            sprintf(path, "The Manage with the name '%s' attempted to log in with the password '%s'.", username, password);
+                            saveHistory("MANAGE", "ERROR", "LOGIN", path);
+                        }
+                        break;
+                    case 2:
+                        //Đúng tài khoản và mật khẩu
+                        if (checkLoginResident(username, password) == 1) {
+                            //Tạo path để lưu lịch sử đăng nhập
+                            sprintf(path, "Resident with the name '%s' has successfully logged in.", username);
+                            saveHistory("RESIDENT", "SUCCESS", "LOGIN", path);
+
+                            //Chuyển sang các tính năng của cư dân
+
+                        }
+                        //Nếu sai tài khoản hoặc mật khẩu
+                        else {
+                            //Tạo path để lưu lịch sử đăng nhập
+                            sprintf(path, "The Resident with the name '%s' attempted to log in with the password '%s'.", username, password);
+                            saveHistory("RESIDENT", "ERROR", "LOGIN", path);
+                        }
+                        break;
                 }
             }
         }
@@ -189,6 +355,11 @@ void loginAdmin() {
                 passwordLength--;
                 password[passwordLength] = '\0';
             }
+        } 
+
+        //Esc
+        else if(key == ESC) {
+            break;
         }
 
         //Nhập ký tự thường
@@ -213,7 +384,6 @@ void loginAdmin() {
 int menuLogin(char *items[], int size) {
     int choice = 0;
     int key;
-    int width = 57;
 
     //Tạo vòng lặp để tạo bảng và lựa chọn
     while (1) {
@@ -222,9 +392,13 @@ int menuLogin(char *items[], int size) {
         system("cls");
 
         //In tiêu đề đăng nhập
-        printf("+-------------------------------------------------------+\n");
-        printf("|                  CHỌN LOẠI TÀI KHOẢN                  |\n");
-        printf("+-------------------------------------------------------+\n");
+        printf("\n");
+        printf("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗\n");
+        printf("██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝\n");
+        printf("██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗  \n");
+        printf("██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝  \n");
+        printf("╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗\n");
+        printf(" ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝\n\n\n");
 
         //In các lựa chọn có thể chọn
         for (int i = 0; i < size; i++) {
@@ -234,31 +408,18 @@ int menuLogin(char *items[], int size) {
             if (i == choice) {
 
                 //Vẽ nội dung
-                printf("|");
                 setColor(11);
-                printf("   >> [%d]. %s", i + 1, items[i]);
+                printf("   >> [%d]. %s\n", i + 1, items[i]);
                 setColor(7);
-
-                //Vẽ khoảng trắng và | ở cuối hàng
-                for (int i = 0; i < width - count - 13; i++) {
-                    printf(" ");
-                }
-                printf("|\n");
             } else {
 
                 //Vẽ nội dung
-                printf("|      [%d]. %s", i + 1, items[i]);
-
-                //Vẽ khoảng trắng và | ở cuối hàng
-                for (int i = 0; i < width - count - 13; i++) {
-                    printf(" ");
-                }
-                printf("|\n");
+                printf("       [%d]. %s\n", i + 1, items[i]);
             }
         }
 
-        //In cuối bảng
-        printf("+-------------------------------------------------------+\n\n");
+        //Hướng dẫn
+        printf("\nNhấp ▲ ▼ để di chuyển\n");
 
         //Điều hướng mũi tên
         key = getch();

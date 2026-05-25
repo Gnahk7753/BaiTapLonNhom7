@@ -162,6 +162,51 @@ void createAccountFolder() {
     }
 }
 
+//Tạo nơi chứa FloorList
+void createFloorList() {
+
+    //Tạo thư mục gốc
+    _mkdir("FloorList");
+
+    for (int floor = 1; floor <= 5; floor++) {
+        char floorName[50];
+        sprintf(floorName, "FloorList/Floor%d", floor);
+
+        //Tạo Floor1, Floor2,...
+        _mkdir(floorName);
+
+        for (int room = 1; room <= 10; room++) {
+            char roomName[60];
+            sprintf(roomName, "FloorList/Floor%d/P%d%02d", floor, floor, room);
+
+            //Tạo P101, P102,...
+            _mkdir(roomName);
+        }
+    }
+}
+
+//Tạo nơi chứa Bill
+void createBill() {
+
+    //Tạo folder Bill
+    _mkdir("Data/Bill");
+
+    for (int floor = 1; floor <= 5; floor++) {
+        char floorPath[100];
+        sprintf(floorPath, "Data/Bill/Floor%d", floor);
+
+        //Tạo Floor1, Floor2,...
+        _mkdir(floorPath);
+
+        for (int room = 1; room <= 10; room++) {
+            char roomPath[150];
+            sprintf(roomPath, "Data/Bill/Floor%d/P%d%02d", floor, floor, room);
+
+            //Tạo P101, P102,...
+            _mkdir(roomPath);
+        }
+    }
+}
 //Kiểm tra thư mục Data có tồn tại không, nếu không thì tạo
 void createDataFolder() {
 
@@ -180,11 +225,47 @@ void createDataFolder() {
 
     //Tạo folder chứa Account
     createAccountFolder();
+
+    //Tạo folder Bill
+    createBill();
+
+    //Tạo folder FloorList
+    createFloorList();
 }
 
 //Hàm đổi màu chữ
 void setColor(int color) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+}
+
+//Ẩn con trỏ
+void hideCursor() {
+
+    CONSOLE_CURSOR_INFO cursorInfo;
+
+    // Lấy thông tin con trỏ hiện tại
+    GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
+
+    // Tắt hiển thị con trỏ
+    cursorInfo.bVisible = FALSE;
+
+    // Cập nhật lại
+    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
+}
+
+//Hiện con trỏ
+void showCursor() {
+
+    CONSOLE_CURSOR_INFO cursorInfo;
+
+    // Lấy thông tin hiện tại của con trỏ (kích thước + trạng thái)
+    GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
+
+    // Bật hiển thị con trỏ (TRUE = hiện, FALSE = ẩn)
+    cursorInfo.bVisible = TRUE;
+
+    // Cập nhật lại cấu hình con trỏ vào console
+    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
 }
 
 //Lưu lịch sử thay đổi

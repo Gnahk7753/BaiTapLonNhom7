@@ -19,6 +19,7 @@ int main () {
     while (1) {
         
         //Lựa chọn loại tài khoản muốn đăng nhập
+        hideCursor();
         int selected = menuLogin(mainMenu, 4);
 
         //Dùng switch case cho từng trường hợp đặng nhập
@@ -26,14 +27,16 @@ int main () {
             
             //Đăng nhập với tư cách Admin
             case 0:
-                loginAdmin();
+                login(0);
                 break;
             case 1:
+                login(1);
                 break;
             case 2:
+                login(2);
                 break;
             case 3:
-                break;
+                return 0;
         }
     }
 }

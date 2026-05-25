@@ -1,2 +1,14 @@
-[ADMIN][SUCCESS][25/05/2026 18:34:38] LOGIN: Admin with the name gnahk has successfully logged in.
-[ADMIN][ERROR][25/05/2026 18:34:54] LOGIN: The user with the name hacker attempted to log in with the password hacker123.
+[ADMIN][SUCCESS][25/05/2026 18:34:38] LOGIN: Admin with the name 'gnahk' has successfully logged in.
+[ADMIN][ERROR][25/05/2026 18:34:54] LOGIN: The user with the name 'hacker' attempted to log in with the password 'hacker123'.
+[ADMIN][SUCCESS][25/05/2026 19:55:21] LOGIN: Admin with the name 'gnahk' has successfully logged in.
+[ADMIN][SUCCESS][25/05/2026 19:55:24] LOGIN: Admin with the name 'gnahk' has successfully logged in.
+[MANAGE][SUCCESS][25/05/2026 20:05:57] LOGIN: Manage with the name 'gnahk' has successfully logged in.
+[MANAGE][SUCCESS][25/05/2026 20:05:58] LOGIN: Manage with the name 'gnahk' has successfully logged in.
+[MANAGE][SUCCESS][25/05/2026 20:06:00] LOGIN: Manage with the name 'gnahk' has successfully logged in.
+[ADMIN][SUCCESS][25/05/2026 20:19:52] LOGIN: Admin with the name 'gnahk' has successfully logged in.
+[MANAGE][SUCCESS][25/05/2026 20:20:12] LOGIN: Manage with the name 'gnahk' has successfully logged in.
+[RESIDENT][ERROR][25/05/2026 20:21:11] LOGIN: The Resident with the name 'gnahk' attempted to log in with the password '123123123'.
+[RESIDENT][SUCCESS][25/05/2026 20:53:04] LOGIN: Resident with the name 'gnahk' has successfully logged in.
+[RESIDENT][SUCCESS][25/05/2026 20:53:05] LOGIN: Resident with the name 'gnahk' has successfully logged in.
+[RESIDENT][SUCCESS][25/05/2026 20:53:05] LOGIN: Resident with the name 'gnahk' has successfully logged in.
+[RESIDENT][SUCCESS][25/05/2026 20:53:06] LOGIN: Resident with the name 'gnahk' has successfully logged in.
