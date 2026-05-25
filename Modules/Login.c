@@ -150,12 +150,23 @@ void loginAdmin() {
 
                 //Nếu đúng tài khoản và mật khẩu
                 if (checkLoginAdmin(username, password) == 1) {
+
+                    //Tạo path để lưu lịch sử đăng nhập
+                    char path[256];
+                    sprintf(path, "Admin with the name '%s' has successfully logged in.", username);
+                    saveHistory("ADMIN", "SUCCESS", "LOGIN", path);
                     printf("        Đăng nhập thành công");
                     scanf("%s", &username);
                 } 
 
                 //Nếu sai tài khoản và mật khẩu
                 else {
+
+                    //Tạo path để lưu lịch sử đăng nhập
+                    char path[256];
+                    sprintf(path, "The user with the name '%s' attempted to log in with the password '%s'.", username, password);
+                    saveHistory("ADMIN", "ERROR", "LOGIN", path);
+
                     printf("        Sai tài khoản hoặc mật khẩu");
                     scanf("%s", &username);
                 }

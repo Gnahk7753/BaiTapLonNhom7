@@ -1,0 +1,2 @@
+[ADMIN][SUCCESS][25/05/2026 18:34:38] LOGIN: Admin with the name gnahk has successfully logged in.
+[ADMIN][ERROR][25/05/2026 18:34:54] LOGIN: The user with the name hacker attempted to log in with the password hacker123.
