@@ -12,3 +12,8 @@
 [RESIDENT][SUCCESS][25/05/2026 20:53:05] LOGIN: Resident with the name 'gnahk' has successfully logged in.
 [RESIDENT][SUCCESS][25/05/2026 20:53:05] LOGIN: Resident with the name 'gnahk' has successfully logged in.
 [RESIDENT][SUCCESS][25/05/2026 20:53:06] LOGIN: Resident with the name 'gnahk' has successfully logged in.
+[MANAGE][ERROR][25/05/2026 21:06:44] LOGIN: The Manage with the name 'gnahk' attempted to log in with the password 'gnahk1231'.
+[MANAGE][ERROR][25/05/2026 21:06:47] LOGIN: The Manage with the name 'gnahk' attempted to log in with the password 'gnahk1231'.
+[ADMIN][ERROR][27/05/2026 16:45:42] LOGIN: The Admin with the name 'gnahk' attempted to log in with the password 'gnahk1234'.
+[ADMIN][SUCCESS][27/05/2026 16:46:31] LOGIN: Admin with the name 'gnahk' has successfully logged in.
+[MANAGE][SUCCESS][27/05/2026 16:49:50] LOGIN: Manage with the name 'gnahk' has successfully logged in.

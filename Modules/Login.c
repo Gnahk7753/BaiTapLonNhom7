@@ -89,7 +89,7 @@ void printLoginForm(char username[], char password[], int currentField) {
         printf("   >> Tài Khoản: %s\n", username);
         setColor(7);
     } else {
-        printf("      Tài Khoản: %s\n", username);
+        printf("       Tài Khoản: %s\n", username);
     }
 
     //Ô mật khẩu
@@ -98,12 +98,22 @@ void printLoginForm(char username[], char password[], int currentField) {
         printf("   >> Mật khẩu : %s\n", password);
         setColor(7);
     } else {
-        printf("      Mật khẩu : %s\n", password);
+        printf("       Mật khẩu : %s\n", password);
+    }
+
+    //Ô đăng nhập
+    if(currentField == 2) {
+        setColor(11);
+        printf("   >> Đăng nhập\n");
+        setColor(7);
+    } else {
+        printf("       Đăng nhập\n");
     }
 
     //Hướng dẫn
     printf("\nNhấn ▲ ▼ để di chuyển\n");
-    printf("Nhấp Esc để thoát\n");
+    printf("Nhấn Enter xác nhận\n");
+    printf("Nhấn Esc để thoát\n");
 
     //Đưa con trỏ tới vị trí nhập
     if(currentField == 0) {
@@ -266,13 +276,13 @@ void login(int select) {
             if (key == KEY_UP) {
                 currentField--;
                 if (currentField < 0) {
-                    currentField = 1;
+                    currentField = 2;
                 }
             }
             //Xuống
             else if (key == KEY_DOWN) {
                 currentField++;
-                if (currentField > 1) {
+                if (currentField > 2) {
                     currentField = 0;
                 }
             }
@@ -280,61 +290,66 @@ void login(int select) {
 
         //Enter để hoàn tất
         else if(key == ENTER) {
-            // Nếu đã nhập đủ
-            if(strlen(username) > 0 && strlen(password) > 7) {
 
-                //Kiểm tra mật khẩu theo giao diện đăng nhập
-                switch (select) {
-                    case 0:
-                        //Đúng tài khoản và mật khẩu
-                        if (checkLoginAdmin(username, password) == 1) {
-                            //Tạo path để lưu lịch sử đăng nhập
-                            sprintf(path, "Admin with the name '%s' has successfully logged in.", username);
-                            saveHistory("ADMIN", "SUCCESS", "LOGIN", path);
+            //Nếu đang chọn đăng nhập
+            if(currentField == 2) {
 
-                            //Chuyển sang các tính năng của admin
+                //Nếu đã nhập đủ
+                if(strlen(username) > 0 && strlen(password) > 7) {
 
-                        } 
-                        //Nếu sai tài khoản hoặc mật khẩu
-                        else {
-                            //Tạo path để lưu lịch sử đăng nhập
-                            sprintf(path, "The Admin with the name '%s' attempted to log in with the password '%s'.", username, password);
-                            saveHistory("ADMIN", "ERROR", "LOGIN", path);
-                        } break;
-                    case 1:
-                        //Đúng tài khoản và mật khẩu
-                        if (checkLoginManage(username, password) == 1) {
-                            //Tạo path để lưu lịch sử đăng nhập
-                            sprintf(path, "Manage with the name '%s' has successfully logged in.", username);
-                            saveHistory("MANAGE", "SUCCESS", "LOGIN", path);
+                    //Kiểm tra mật khẩu theo giao diện đăng nhập
+                    switch (select) {
+                        case 0:
+                            //Đúng tài khoản và mật khẩu
+                            if (checkLoginAdmin(username, password) == 1) {
+                                //Tạo path để lưu lịch sử đăng nhập
+                                sprintf(path, "Admin with the name '%s' has successfully logged in.", username);
+                                saveHistory("ADMIN", "SUCCESS", "LOGIN", path);
 
-                            //Chuyển sang các tính năng của quản lý
+                                //Chuyển sang các tính năng của admin
 
-                        }
-                        //Nếu sai tài khoản hoặc mật khẩu
-                        else {
-                            //Tạo path để lưu lịch sử đăng nhập
-                            sprintf(path, "The Manage with the name '%s' attempted to log in with the password '%s'.", username, password);
-                            saveHistory("MANAGE", "ERROR", "LOGIN", path);
-                        }
-                        break;
-                    case 2:
-                        //Đúng tài khoản và mật khẩu
-                        if (checkLoginResident(username, password) == 1) {
-                            //Tạo path để lưu lịch sử đăng nhập
-                            sprintf(path, "Resident with the name '%s' has successfully logged in.", username);
-                            saveHistory("RESIDENT", "SUCCESS", "LOGIN", path);
+                            } 
+                            //Nếu sai tài khoản hoặc mật khẩu
+                            else {
+                                //Tạo path để lưu lịch sử đăng nhập
+                                sprintf(path, "The Admin with the name '%s' attempted to log in with the password '%s'.", username, password);
+                                saveHistory("ADMIN", "ERROR", "LOGIN", path);
+                            } break;
+                        case 1:
+                            //Đúng tài khoản và mật khẩu
+                            if (checkLoginManage(username, password) == 1) {
+                                //Tạo path để lưu lịch sử đăng nhập
+                                sprintf(path, "Manage with the name '%s' has successfully logged in.", username);
+                                saveHistory("MANAGE", "SUCCESS", "LOGIN", path);
 
-                            //Chuyển sang các tính năng của cư dân
+                                //Chuyển sang các tính năng của quản lý
 
-                        }
-                        //Nếu sai tài khoản hoặc mật khẩu
-                        else {
-                            //Tạo path để lưu lịch sử đăng nhập
-                            sprintf(path, "The Resident with the name '%s' attempted to log in with the password '%s'.", username, password);
-                            saveHistory("RESIDENT", "ERROR", "LOGIN", path);
-                        }
-                        break;
+                            }
+                            //Nếu sai tài khoản hoặc mật khẩu
+                            else {
+                                //Tạo path để lưu lịch sử đăng nhập
+                                sprintf(path, "The Manage with the name '%s' attempted to log in with the password '%s'.", username, password);
+                                saveHistory("MANAGE", "ERROR", "LOGIN", path);
+                            }
+                            break;
+                        case 2:
+                            //Đúng tài khoản và mật khẩu
+                            if (checkLoginResident(username, password) == 1) {
+                                //Tạo path để lưu lịch sử đăng nhập
+                                sprintf(path, "Resident with the name '%s' has successfully logged in.", username);
+                                saveHistory("RESIDENT", "SUCCESS", "LOGIN", path);
+
+                                //Chuyển sang các tính năng của cư dân
+
+                            }
+                            //Nếu sai tài khoản hoặc mật khẩu
+                            else {
+                                //Tạo path để lưu lịch sử đăng nhập
+                                sprintf(path, "The Resident with the name '%s' attempted to log in with the password '%s'.", username, password);
+                                saveHistory("RESIDENT", "ERROR", "LOGIN", path);
+                            }
+                            break;
+                    }
                 }
             }
         }
@@ -419,7 +434,8 @@ int menuLogin(char *items[], int size) {
         }
 
         //Hướng dẫn
-        printf("\nNhấp ▲ ▼ để di chuyển\n");
+        printf("\nNhấn ▲ ▼ để di chuyển\n");
+        printf("Nhấn Enter để chọn\n");
 
         //Điều hướng mũi tên
         key = getch();
