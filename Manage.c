@@ -13,6 +13,7 @@ typedef struct {
 } Manager;
 
 Manager manager;
+char currentPassword[MAX], currentAccountPath[200];
 
 //	Hàm hiển thị thông tin
 void showManagerInfo() {
@@ -28,7 +29,137 @@ void showManagerInfo() {
 
 //	Hàm chỉnh sửa thông tin
 void editManagerAccount() {
-    printf("\n[Chỉnh sửa thông tin tài khoản quản lý]\n");
+
+    int choice;
+
+    char oldPassword[MAX];
+    char newPassword[MAX];
+    char newPhoneNumber[MAX];
+
+    char filePassword[MAX];
+
+    FILE *file;
+
+    printf("\n========== CHỈNH SỬA TÀI KHOẢN ==========\n");
+
+    printf("1. Thay đổi số điện thoại\n");
+    printf("2. Thay đổi mật khẩu\n");
+    printf("3. Thay đổi thông tin khác\n");
+
+    printf("\nNhập lựa chọn: ");
+    scanf("%d", &choice);
+
+    switch(choice) {
+
+        // ====================================
+        // THAY ĐỔI SỐ ĐIỆN THOẠI
+        // ====================================
+
+        case 1:
+
+            printf("\nNhập số điện thoại mới: ");
+            scanf("%s", newPhoneNumber);
+
+            // Cập nhật struct
+            strcpy(manager.phoneNumber, newPhoneNumber);
+
+            /*
+                ======================================
+                GHI ĐÈ FILE
+                ======================================
+            */
+
+            file = fopen(currentAccountPath, "w");
+
+            if(file == NULL) {
+
+                printf("\nKhông thể mở file!\n");
+
+                return;
+            }
+
+            // Ghi lại toàn bộ dữ liệu
+            fprintf(file, "%s\n", currentPassword);
+            fprintf(file, "%s\n", manager.fullName);
+            fprintf(file, "%s\n", manager.cccd);
+            fprintf(file, "%s\n", manager.birthYear);
+            fprintf(file, "%s\n", manager.province);
+            fprintf(file, "%s\n", manager.phoneNumber);
+
+            fclose(file);
+
+            printf("\nĐã cập nhật số điện thoại thành công!\n");
+
+            break;
+
+        // ====================================
+        // THAY ĐỔI MẬT KHẨU
+        // ====================================
+
+        case 2:
+
+            printf("\nNhập mật khẩu cũ: ");
+            scanf("%s", oldPassword);
+
+            // Kiểm tra mật khẩu cũ
+            if(strcmp(oldPassword, currentPassword) != 0) {
+
+                printf("\nMật khẩu cũ không đúng!\n");
+
+                return;
+            }
+
+            printf("Nhập mật khẩu mới: ");
+            scanf("%s", newPassword);
+
+            // Cập nhật mật khẩu hiện tại
+            strcpy(currentPassword, newPassword);
+
+            /*
+                ======================================
+                GHI ĐÈ FILE
+                ======================================
+            */
+
+            file = fopen(currentAccountPath, "w");
+
+            if(file == NULL) {
+
+                printf("\nKhông thể mở file!\n");
+
+                return;
+            }
+
+            // Ghi mật khẩu mới
+            fprintf(file, "%s\n", currentPassword);
+
+            // Ghi lại thông tin
+            fprintf(file, "%s\n", manager.fullName);
+            fprintf(file, "%s\n", manager.cccd);
+            fprintf(file, "%s\n", manager.birthYear);
+            fprintf(file, "%s\n", manager.province);
+            fprintf(file, "%s\n", manager.phoneNumber);
+
+            fclose(file);
+
+            printf("\nĐổi mật khẩu thành công!\n");
+
+            break;
+
+        // ====================================
+        // THÔNG TIN KHÁC
+        // ====================================
+
+        case 3:
+
+            printf("\nVui lòng báo với admin để được hỗ trợ.\n");
+
+            break;
+
+        default:
+
+            printf("\nLựa chọn không hợp lệ!\n");
+    }
 }
 
 //	Hàm tạo tài khoản cho cư dân
@@ -121,7 +252,13 @@ int login() {
     manager.birthYear[strcspn(manager.birthYear, "\n")] = 0;
     manager.province[strcspn(manager.province, "\n")] = 0;
     manager.phoneNumber[strcspn(manager.phoneNumber, "\n")] = 0;
+    
+    //	Lưu mật khẩu hiện tại
+    strcpy(currentPassword, password);
 
+	//	Lưu đường dẫn file hiện tại
+	strcpy(currentAccountPath, path);
+	
     fclose(file);
 
     printf("\nĐăng nhập thành công!\n");
