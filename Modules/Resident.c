@@ -47,6 +47,10 @@ typedef struct {
     char password[50];
 
 } Resident;
+
+
+// ====================== CHECK ACCOUNT ======================
+
 //Kiểm tra tài khoản
 int checkAccount(char filePath[], char username[], char password[]) {
 
