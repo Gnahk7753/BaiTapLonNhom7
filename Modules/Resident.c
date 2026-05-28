@@ -47,8 +47,37 @@ typedef struct {
     char password[50];
 
 } Resident;
+//Kiểm tra tài khoản
+int checkAccount(char filePath[], char username[], char password[]) {
 
+    FILE *file = fopen(filePath, "r");
 
+    if (file == NULL) {
+
+        printf("Khong mo duoc file!\n");
+        return 0;
+    }
+
+    char fileUser[50];
+    char filePass[50];
+
+    // Đọc từng tài khoản trong file
+    while (fscanf(file, "%s %s", fileUser, filePass) != EOF) {
+
+        // So sánh username + password
+        if (strcmp(username, fileUser) == 0 &&
+            strcmp(password, filePass) == 0) {
+
+            fclose(file);
+
+            return 1;
+        }
+    }
+
+    fclose(file);
+
+    return 0;
+}
 
 /*
     Hàm hiển thị thông tin cư dân
