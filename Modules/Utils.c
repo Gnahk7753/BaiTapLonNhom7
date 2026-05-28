@@ -175,7 +175,7 @@ void createFloorList() {
         //Tạo Floor1, Floor2,...
         _mkdir(floorName);
 
-        for (int room = 1; room <= 10; room++) {
+        for (int room = 1; room <= 5; room++) {
             char roomName[60];
             sprintf(roomName, "FloorList/Floor%d/P%d%02d", floor, floor, room);
 
@@ -198,7 +198,7 @@ void createBill() {
         //Tạo Floor1, Floor2,...
         _mkdir(floorPath);
 
-        for (int room = 1; room <= 10; room++) {
+        for (int room = 1; room <= 5; room++) {
             char roomPath[150];
             sprintf(roomPath, "Data/Bill/Floor%d/P%d%02d", floor, floor, room);
 
@@ -207,6 +207,7 @@ void createBill() {
         }
     }
 }
+
 //Kiểm tra thư mục Data có tồn tại không, nếu không thì tạo
 void createDataFolder() {
 
