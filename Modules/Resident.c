@@ -10,7 +10,7 @@
 // ====================== UTILS.H ======================
 
 // Hàm lưu lịch sử thay đổi
-void saveHistory(char action[]) {
+void saveHistory(const char action[]) {
 
     FILE *file = fopen("./data/history.txt", "a");
 
