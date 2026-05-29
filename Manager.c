@@ -305,7 +305,7 @@ void removeCCCDFromFile(char cccd[]) {
 
     char line[32];
     while (fgets(line, sizeof(line), f) != NULL) {
-        line[strcspn(line, "\r\n")] = '\0';
+        trimNewline(line);
         if (strcmp(line, cccd) != 0 && strlen(line) > 0) {
             fprintf(temp, "%s\n", line);
         }
@@ -338,8 +338,7 @@ int saveResidentData(const char *username, const char *tang, const char *phong, 
     FILE *f1 = fopen(path1, "w");
     if (f1 == NULL) return 0;
     
-    fprintf(f1, "%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
-            acc.password, acc.fullName, acc.cccd, acc.year, acc.gender, acc.province, acc.phone);
+    fprintf(f1, "%s\n%s\n%s\n%s\n%s\n%s\n%s\n", acc.password, acc.fullName, acc.cccd, acc.year, acc.gender, acc.province, acc.phone);
     fclose(f1);
 
     // 2. Ghi FILE vị trí phòng ở cư dân
@@ -348,8 +347,7 @@ int saveResidentData(const char *username, const char *tang, const char *phong, 
     FILE *f2 = fopen(path2, "w");
     if (f2 == NULL) return 0;
     
-    fprintf(f2, "%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
-            acc.password, acc.fullName, acc.cccd, acc.year, acc.gender, acc.province, acc.phone);
+    fprintf(f2, "%s\n%s\n%s\n%s\n%s\n%s\n%s\n", acc.password, acc.fullName, acc.cccd, acc.year, acc.gender, acc.province, acc.phone);
     fclose(f2);
 
     return 1; // Lưu thành công cả 2 file
@@ -363,28 +361,28 @@ void createResidentAccount() {
     printf("\n================ TẠO TÀI KHOẢN CƯ DÂN ================\n");
     printf("-> Nhập tên tài khoản: "); 
 	fgets(acc.username, sizeof(acc.username), stdin); 
-	acc.username[strcspn(acc.username, "\r\n")] = '\0';
-    
+	trimNewline(acc.username);
+	
 	printf("-> Nhập mật khẩu: "); 
 	fgets(acc.password, sizeof(acc.password), stdin); 
-	acc.password[strcspn(acc.password, "\r\n")] = '\0';
+	trimNewline(acc.password);
     
 	printf("-> Nhập họ và tên: "); 
 	fgets(acc.fullName, sizeof(acc.fullName), stdin); 
-	acc.fullName[strcspn(acc.fullName, "\r\n")] = '\0';
+	trimNewline(acc.fullName);
     normalizeName(acc.fullName); 
     
 	printf("-> Nhập số điện thoại (Bấm Enter nếu bỏ qua): "); 
 	fgets(acc.phone, sizeof(acc.phone), stdin); 
-	acc.phone[strcspn(acc.phone, "\r\n")] = '\0';
+	trimNewline(acc.phone);
     
 	printf("-> Nhập tầng đang ở: "); 
 	fgets(tang, sizeof(tang), stdin); 
-	tang[strcspn(tang, "\r\n")] = '\0';
+	trimNewline(tang);
     
 	printf("-> Nhập phòng đang ở: "); 
 	fgets(phong, sizeof(phong), stdin); 
-	phong[strcspn(phong, "\r\n")] = '\0';
+	trimNewline(phong);
 
     // Gọi hàm dùng chung để nhập và kiểm tra CCCD
     inputAndValidateCCCD(&acc);
@@ -413,15 +411,15 @@ void editResidentAccount() {
     printf("\n================ CHỈNH SỬA TÀI KHOẢN CƯ DÂN ================\n");
     printf("-> Nhập TÊN TÀI KHOẢN cư dân muốn sửa: "); 
     fgets(old_acc.username, sizeof(old_acc.username), stdin); 
-    old_acc.username[strcspn(old_acc.username, "\r\n")] = '\0';
+    trimNewline(old_acc.username);
 
     printf("-> Nhập TẦNG hiện tại của cư dân này: "); 
     fgets(old_tang, sizeof(old_tang), stdin); 
-    old_tang[strcspn(old_tang, "\r\n")] = '\0';
+    trimNewline(old_tang);
 
     printf("-> Nhập PHÒNG hiện tại của cư dân này: "); 
     fgets(old_phong, sizeof(old_phong), stdin); 
-    old_phong[strcspn(old_phong, "\r\n")] = '\0';
+    trimNewline(old_phong);
 
     // 1. Check thư mục phòng cũ
     char check_dir_path[256];
@@ -444,25 +442,25 @@ void editResidentAccount() {
 
     // Đọc dữ liệu cũ
     fgets(old_acc.password, sizeof(old_acc.password), f_read);   
-	old_acc.password[strcspn(old_acc.password, "\r\n")] = '\0';
+	trimNewline(old_acc.password);
     
 	fgets(old_acc.fullName, sizeof(old_acc.fullName), f_read);   
-	old_acc.fullName[strcspn(old_acc.fullName, "\r\n")] = '\0';
+	trimNewline(old_acc.fullName);
     
 	fgets(old_acc.cccd, sizeof(old_acc.cccd), f_read);           
-	old_acc.cccd[strcspn(old_acc.cccd, "\r\n")] = '\0';
+	trimNewline(old_acc.cccd);
     
 	fgets(old_acc.year, sizeof(old_acc.year), f_read);           
-	old_acc.year[strcspn(old_acc.year, "\r\n")] = '\0';
+	trimNewline(old_acc.year);
     
 	fgets(old_acc.gender, sizeof(old_acc.gender), f_read);       
-	old_acc.gender[strcspn(old_acc.gender, "\r\n")] = '\0';
+	trimNewline(old_acc.gender);
     
 	fgets(old_acc.province, sizeof(old_acc.province), f_read);   
-	old_acc.province[strcspn(old_acc.province, "\r\n")] = '\0';
+	trimNewline(old_acc.province);
     
 	fgets(old_acc.phone, sizeof(old_acc.phone), f_read);         
-	old_acc.phone[strcspn(old_acc.phone, "\r\n")] = '\0';
+	trimNewline(old_acc.phone);
     
 	fclose(f_read);
 
@@ -482,22 +480,22 @@ void editResidentAccount() {
     printf("\n--- NHẬP THÔNG TIN CHỈNH SỬA MỚI ---\n");
     printf("-> Nhập tên tài khoản MỚI: "); 
     fgets(new_acc.username, sizeof(new_acc.username), stdin); 
-    new_acc.username[strcspn(new_acc.username, "\r\n")] = '\0';
+    trimNewline(new_acc.username);
 
     printf("-> Nhập họ và tên MỚI: "); 
     fgets(new_acc.fullName, sizeof(new_acc.fullName), stdin); 
-    new_acc.fullName[strcspn(new_acc.fullName, "\r\n")] = '\0';
+    trimNewline(new_acc.fullName);
     normalizeName(new_acc.fullName); 
 
     // Nhập và kiểm tra phòng mới
     while (1) {
         printf("-> Nhập tầng MỚI: "); 
         fgets(new_tang, sizeof(new_tang), stdin); 
-        new_tang[strcspn(new_tang, "\r\n")] = '\0';
+        trimNewline(new_tang);
 
         printf("-> Nhập phòng MỚI: "); 
         fgets(new_phong, sizeof(new_phong), stdin); 
-        new_phong[strcspn(new_phong, "\r\n")] = '\0';
+        trimNewline(new_phong);
 
         char new_dir_path[256];
         sprintf(new_dir_path, "FloorList/Floor%s/P%s0%s", new_tang, new_tang, new_phong);
@@ -535,6 +533,204 @@ void editResidentAccount() {
     }
 
     printf("\n[Thành công]. Đã chuyển phòng và cập nhật thông tin!\n");
+}
+
+// Hàm xóa tài khoản cư dân
+void deleteResidentAccount() {
+	
+    char input_username[64];
+    char input_cccd[32];
+    char confirm; 
+    
+    ResidentAccount file_acc; // Dùng struct đồng bộ với chức năng 3 và 4
+    char tang[10], phong[10]; // Biến vị trí phòng tách riêng theo yêu cầu
+
+    printf("\n================ XÓA TÀI KHOẢN CƯ DÂN ================\n");
+    
+    printf("-> Nhập TÊN TÀI KHOẢN muốn xóa: ");
+    fgets(input_username, sizeof(input_username), stdin);
+    trimNewline(input_username);
+
+    printf("-> Nhập số CCCD để xác nhận: ");
+    fgets(input_cccd, sizeof(input_cccd), stdin);
+    trimNewline(input_cccd);
+
+    printf("-> Nhập TẦNG hiện tại của cư dân: ");
+    fgets(tang, sizeof(tang), stdin);
+    trimNewline(tang);
+
+    printf("-> Nhập PHÒNG hiện tại của cư dân: ");
+    fgets(phong, sizeof(phong), stdin);
+    trimNewline(phong);
+
+    // Tạo đường dẫn file tài khoản (File 1)
+    char path1[256];
+    sprintf(path1, "Data/Account/Resident/%s.txt", input_username);
+    
+    FILE *f = fopen(path1, "r");
+    if (f == NULL) {
+        printf("\n[Lỗi]. Không tìm thấy tên tài khoản '%s' trên hệ thống!\n", input_username);
+        return;
+    }
+
+    // Đọc dữ liệu từ file để lấy số CCCD gốc đối chiếu nhằm bảo mật thông tin
+    fgets(file_acc.password, sizeof(file_acc.password), f); 
+    fgets(file_acc.fullName, sizeof(file_acc.fullName), f); 
+    fgets(file_acc.cccd, sizeof(file_acc.cccd), f); // Số CCCD nằm ở dòng thứ 3 của file
+    fclose(f); // Đóng file ngay lập tức để hệ thống giải phóng file, lát nữa mới xóa được
+
+    // Xóa ký tự xuống dòng của số CCCD vừa đọc từ file
+   trimNewline(file_acc.cccd);
+
+    // Kiểm tra tính khớp nhau giữa dữ liệu nhập vào và dữ liệu lưu trong file
+    if (strcmp(input_cccd, file_acc.cccd) != 0) {
+        printf("\n[Thất bại]. CCCD không có trong tài khoản! Hủy bỏ lệnh xóa.\n");
+        return; 
+    }
+
+    // Bước hỏi xác nhận trước khi tiến hành xóa vĩnh viễn
+    printf("\nCẢNH BÁO: Bạn có chắc chắn muốn xóa vĩnh viễn tài khoản cư dân này không?\n");
+    printf("Bấm (y/Y) để ĐỒNG Ý xóa, hoặc bấm phím bất kỳ khác để HỦY: ");
+    scanf("%c", &confirm);
+    getchar(); // Xóa ký tự thừa '\n' tránh bị trôi lệnh ở các menu sau
+
+    if (confirm != 'y' && confirm != 'Y') {
+        printf("\n[Đã hủy]. Hệ thống đã hủy bỏ lệnh xóa tài khoản an toàn.\n");
+        return; 
+    }
+
+    // BẮT ĐẦU QUÁ TRÌNH XÓA FILE KHI ĐÃ XÁC NHẬN Y/Y:
+    
+    // Tạo đường dẫn File 2 (File đặt trong sơ đồ phòng) dựa trên vị trí phòng và số CCCD trong struct
+    char path2[256];
+    sprintf(path2, "FloorList/Floor%s/P%s0%s/%s.txt", tang, tang, phong, file_acc.cccd);
+
+    // Thực thi lệnh xóa file vĩnh viễn trên máy tính
+    int res1 = remove(path1); // Xóa file tài khoản cư dân
+    int res2 = remove(path2); // Xóa file thông tin nằm trong phòng ở
+
+    // Gọi hàm dùng chung để xóa số CCCD khỏi danh sách tổng Data/cccd.txt
+    removeCCCDFromFile(file_acc.cccd);
+
+    // In thông báo kết quả cho quản lý dễ theo dõi
+    if (res1 == 0 && res2 == 0) {
+        printf("\n[Thành công]. Đã xóa hoàn toàn tài khoản '%s' và file phòng ở ra khỏi hệ thống!\n", input_username);
+    } else if (res1 == 0 && res2 != 0) {
+        printf("\n[Cảnh báo]. Đã xóa file tài khoản thành công và dọn dẹp CCCD tổng.\n");
+        printf("Tuy nhiên không tìm thấy file phòng để xóa (có thể điền sai thông tin tầng/phòng cũ).\n");
+    } else {
+        printf("\n[Lỗi]. Không thể thực hiện lệnh xóa file. Vui lòng kiểm tra lại quyền truy cập!\n");
+    }
+}
+
+// Hàm bổ trợ in chuỗi UTF-8 kèm khoảng trắng chuẩn visual (Chống lệch hàng khi có dấu tiếng Việt)
+void printPadded(const char *str, int width) {
+    int chars = MultiByteToWideChar(CP_UTF8, 0, str, -1, NULL, 0) - 1;
+    if (chars < 0) chars = 0;
+    printf("%s", str);
+    for (int i = 0; i < width - chars; i++) {
+        printf(" ");
+    }
+}
+
+// Hàm xem danh sách các phòng
+void displayRoomOccupantsByFloor() {
+    char input_tang[10];
+    char room_dir_path[256];
+    char file_path[256];
+    char room_name[10];
+    
+    ResidentAccount occupant; 
+    struct dirent *entry;
+    DIR *dir;
+
+    printf("\n================ XEM DANH SÁCH CÁC PHÒNG ================\n");
+    printf("-> Chọn tầng muốn hiển thị danh sách phòng: ");
+    fgets(input_tang, sizeof(input_tang), stdin);
+    trimNewline(input_tang);
+
+    printf("\nTầng %s\n", input_tang);
+    printf("-------------------------------------------------------------------------------------------\n");
+    printPadded("Phòng", 7); printf(" ");
+    printPadded("Họ và tên", 25); printf(" ");
+    printPadded("CCCD", 15); printf(" ");
+    printPadded("Năm sinh", 10); printf(" ");
+    printPadded("Giới tính", 10); printf(" ");
+    printPadded("Số điện thoại", 15); printf("\n");
+    printf("-------------------------------------------------------------------------------------------\n");
+
+    for (int p = 1; p <= 5; p++) {
+        sprintf(room_dir_path, "FloorList/Floor%s/P%s0%d", input_tang, input_tang, p);
+
+        dir = opendir(room_dir_path);
+        if (dir == NULL) {
+            continue; 
+        }
+
+        int has_occupant = 0; 
+        sprintf(room_name, "%s0%d", input_tang, p);
+
+        while ((entry = readdir(dir)) != NULL) {
+            if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
+                continue;
+            }
+
+            sprintf(file_path, "%s/%s", room_dir_path, entry->d_name);
+            
+            FILE *f = fopen(file_path, "r");
+            if (f != NULL) {
+                fgets(occupant.password, sizeof(occupant.password), f); 
+				trimNewline(occupant.password);
+                
+				fgets(occupant.fullName, sizeof(occupant.fullName), f); 
+				trimNewline(occupant.fullName);
+                
+				fgets(occupant.cccd, sizeof(occupant.cccd), f);         
+				trimNewline(occupant.cccd);
+                
+				fgets(occupant.year, sizeof(occupant.year), f);         
+				trimNewline(occupant.year);
+                
+				fgets(occupant.gender, sizeof(occupant.gender), f);     
+				trimNewline(occupant.gender);
+                
+				fgets(occupant.province, sizeof(occupant.province), f); 
+				trimNewline(occupant.province);
+                
+				fgets(occupant.phone, sizeof(occupant.phone), f);       
+				trimNewline(occupant.phone);
+                
+				fclose(f);
+
+                if (strlen(occupant.phone) == 0) {
+                    strcpy(occupant.phone, "Không có");
+                }
+
+                if (has_occupant == 0) {
+                    printPadded(room_name, 7); printf(" ");
+                    printPadded(occupant.fullName, 25); printf(" ");
+                    printPadded(occupant.cccd, 15); printf(" ");
+                    printPadded(occupant.year, 10); printf(" ");
+                    printPadded(occupant.gender, 10); printf(" ");
+                    printPadded(occupant.phone, 15); printf("\n");
+                    has_occupant = 1; 
+                } else {
+                    printPadded("", 7); printf(" ");
+                    printPadded(occupant.fullName, 25); printf(" ");
+                    printPadded(occupant.cccd, 15); printf(" ");
+                    printPadded(occupant.year, 10); printf(" ");
+                    printPadded(occupant.gender, 10); printf(" ");
+                    printPadded(occupant.phone, 15); printf("\n");
+                }
+            }
+        }
+        closedir(dir); 
+
+        if (has_occupant == 1) {
+            printf("....... ......................... ............... .......... .......... ...............\n");
+        }
+    }
+    printf("-------------------------------------------------------------------------------------------\n");
 }
 
 // Menu quản lý chính
@@ -578,7 +774,13 @@ void managerMenu() {
 			case 4: 
 				editResidentAccount();
 				break;
-			case 5: case 6: case 7: case 8: case 9:
+			case 5: 
+				deleteResidentAccount();
+				break;
+			case 6:
+				displayRoomOccupantsByFloor();
+				break;
+			case 7: case 8: case 9:
                 printf("\nChưa code chức năng này.\n"); 
                 break;
             case 0: printf("\nThoát chương trình.\n"); break;
