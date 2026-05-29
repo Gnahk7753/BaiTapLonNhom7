@@ -20,7 +20,7 @@ void printHelloManage();
 void printHelloResident();
 
 //Hàm vẽ giao diện login
-void printLoginForm(char username[], char password[], int currentField);
+void printLoginForm(char username[], char password[], int currentField, int *fail);
 
 //Hàm kiểm tra tài khoản và mật khẩu Admin trả về 1 nếu đúng và 0 nếu sai
 int checkLoginAdmin(char username[], char password[]);

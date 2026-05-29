@@ -81,7 +81,7 @@ void printHelloResident() {
 }
 
 //Hàm vẽ giao diện đăng nhập
-void printLoginForm(char username[], char password[], int currentField) {
+void printLoginForm(char username[], char password[], int currentField, int *fail) {
 
     //Ô tài khoản
     if(currentField == 0) {
@@ -102,7 +102,12 @@ void printLoginForm(char username[], char password[], int currentField) {
     }
 
     //Ô đăng nhập
-    if(currentField == 2) {
+    if(*fail) {
+        setColor(12);
+        printf("   >> Sai tài khoản hoặc mật khẩu\n");
+        setColor(7);
+        *fail = 0; // Reset trạng thái thất bại sau khi hiển thị
+    }else if(currentField == 2) {
         setColor(11);
         printf("   >> Đăng nhập\n");
         setColor(7);
@@ -240,6 +245,7 @@ void login(int select) {
     char username[50] = "", password[50] = "";
     int usernameLength = 0, passwordLength = 0;
     int currentField = 0, key;
+    int fail = 0;
 
     //Đặt con trỏ mặc định tại chỗ nhập tài khoản
     gotoxy(17, 8);
@@ -264,7 +270,7 @@ void login(int select) {
         }
 
         //In form đăng nhập
-        printLoginForm(username, password, currentField);
+        printLoginForm(username, password, currentField, &fail);
 
         //Điều hướng mũi tên
         key = getch();
@@ -307,14 +313,18 @@ void login(int select) {
                                 saveHistory("ADMIN", "SUCCESS", "LOGIN", path);
 
                                 //Chuyển sang các tính năng của admin
-
+                                
                             } 
                             //Nếu sai tài khoản hoặc mật khẩu
                             else {
                                 //Tạo path để lưu lịch sử đăng nhập
                                 sprintf(path, "The Admin with the name '%s' attempted to log in with the password '%s'.", username, password);
                                 saveHistory("ADMIN", "ERROR", "LOGIN", path);
-                            } break;
+
+                                //In thông báo đăng nhập thất bại
+                                fail = 1;
+                            } 
+                            break;
                         case 1:
                             //Đúng tài khoản và mật khẩu
                             if (checkLoginManage(username, password) == 1) {
@@ -330,6 +340,9 @@ void login(int select) {
                                 //Tạo path để lưu lịch sử đăng nhập
                                 sprintf(path, "The Manage with the name '%s' attempted to log in with the password '%s'.", username, password);
                                 saveHistory("MANAGE", "ERROR", "LOGIN", path);
+
+                                //In thông báo đăng nhập thất bại
+                                fail = 1;
                             }
                             break;
                         case 2:
@@ -347,6 +360,9 @@ void login(int select) {
                                 //Tạo path để lưu lịch sử đăng nhập
                                 sprintf(path, "The Resident with the name '%s' attempted to log in with the password '%s'.", username, password);
                                 saveHistory("RESIDENT", "ERROR", "LOGIN", path);
+                                
+                                //In thông báo đăng nhập thất bại
+                                fail = 1;
                             }
                             break;
                     }
@@ -417,17 +433,12 @@ int menuLogin(char *items[], int size) {
 
         //In các lựa chọn có thể chọn
         for (int i = 0; i < size; i++) {
-
-            //Đếm số từ trong nội dung in
-            int count = utf8len (items[i]);
             if (i == choice) {
-
                 //Vẽ nội dung
                 setColor(11);
                 printf("   >> [%d]. %s\n", i + 1, items[i]);
                 setColor(7);
             } else {
-
                 //Vẽ nội dung
                 printf("       [%d]. %s\n", i + 1, items[i]);
             }
