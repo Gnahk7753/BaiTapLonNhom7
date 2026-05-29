@@ -853,7 +853,174 @@ void searchResident() {
 }
 
 // Hàm nhập thông tin số điện, số nước
+void createMonthlyBill() {
+    char tang[10], phong[10];
+    int so_dien = 0, so_nuoc = 0;
+    long long tien_phong = 5000000;
+    long long tien_dien = 0;
+    long long tien_nuoc = 0;
 
+    printf("\n================ NHẬP SỐ ĐIỆN NƯỚC & TẠO HÓA ĐƠN ================\n");
+    printf("-> Nhập tầng: ");
+    fgets(tang, sizeof(tang), stdin);
+    trimNewline(tang);
+
+    printf("-> Nhập phòng: ");
+    fgets(phong, sizeof(phong), stdin);
+    trimNewline(phong);
+
+    // Lấy thời gian thực từ hệ thống để tạo tên file (Ví dụ: 052026.txt)
+    time_t t = time(NULL);
+    struct tm *tm_info = localtime(&t);
+    char file_name[32];
+    sprintf(file_name, "%02d%04d.txt", tm_info->tm_mon + 1, tm_info->tm_year + 1900);
+
+    // Yêu cầu nhập số điện và số nước từ bàn phím
+    printf("-> Nhập số điện tiêu thụ (kWh): ");
+    scanf("%d", &so_dien);
+    printf("-> Nhập số nước tiêu thụ (m3): ");
+    scanf("%d", &so_nuoc);
+    getchar(); // Xóa ký tự xuống dòng thừa trong bộ đệm
+
+    // Tính tiền điện theo công thức lũy tiến 6 bậc
+    int temp_dien = so_dien;
+    if (temp_dien > 400) {
+        tien_dien += (long long)(temp_dien - 400) * 4500;
+        temp_dien = 400;
+    }
+    if (temp_dien > 300) {
+        tien_dien += (long long)(temp_dien - 300) * 4000;
+        temp_dien = 300;
+    }
+    if (temp_dien > 200) {
+        tien_dien += (long long)(temp_dien - 200) * 3500;
+        temp_dien = 200;
+    }
+    if (temp_dien > 100) {
+        tien_dien += (long long)(temp_dien - 100) * 3100;
+        temp_dien = 100;
+    }
+    if (temp_dien > 50) {
+        tien_dien += (long long)(temp_dien - 50) * 2600;
+        temp_dien = 50;
+    }
+    tien_dien += (long long)temp_dien * 2000;
+
+    // Tính tiền nước theo giá cố định
+    tien_nuoc = (long long)so_nuoc * 15000;
+
+    // Tạo đường dẫn và ghi âm thầm vào file txt theo đúng thứ tự 5 dòng
+    char file_path[512];
+    sprintf(file_path, "Data/Bill/Floor%s/P%s0%s/%s", tang, tang, phong, file_name);
+
+    FILE *f = fopen(file_path, "w");
+    if (f == NULL) {
+        printf("\n[Lỗi]. Không thể tạo file hóa đơn tại đường dẫn này!\n");
+        printf("(Vui lòng kiểm tra lại cấu trúc thư mục Data/Bill/Floor%s/P%s0%s/ đã tồn tại chưa)\n", tang, tang, phong);
+        return;
+    }
+
+    fprintf(f, "%lld\n", tien_phong); 
+    fprintf(f, "%d\n", so_dien);     
+    fprintf(f, "%lld\n", tien_dien);   
+    fprintf(f, "%d\n", so_nuoc);       
+    fprintf(f, "%lld\n", tien_nuoc);  
+    fclose(f);
+
+    printf("\n[Thành công]. Đã nhập số liệu và xuất hóa đơn tháng %02d/%04d thành công!\n", tm_info->tm_mon + 1, tm_info->tm_year + 1900);
+}
+
+// Hàm xuất hóa đơn
+void displayFloorBillsByMonth() {
+    char input_tang[10];
+    char input_thang[10];
+    char input_nam[10];
+    char file_name[32];
+    char path_file[512];
+    char room_name[10];
+    int has_any_bill = 0;
+
+    char border[] = "+---------+-------------------+-----------+--------------------+-----------+--------------------+--------------------+";
+
+    printf("\n================ XEM HÓA ĐƠN THEO TẦNG ================\n");
+    printf("-> Nhập tầng muốn xem: ");
+    fgets(input_tang, sizeof(input_tang), stdin);
+    trimNewline(input_tang);
+
+    printf("-> Nhập tháng: ");
+    fgets(input_thang, sizeof(input_thang), stdin);
+    trimNewline(input_thang);
+
+    printf("-> Nhập năm: ");
+    fgets(input_nam, sizeof(input_nam), stdin);
+    trimNewline(input_nam);
+
+    sprintf(file_name, "%02d%04d.txt", atoi(input_thang), atoi(input_nam));
+
+    printf("\nTầng %s:\n", input_tang);
+    printf("%s\n", border);
+    
+    printf("| "); printPadded("Phòng", 7);
+    printf(" | "); printPadded("Tiền phòng(VNĐ)", 17);
+    printf(" | "); printPadded("Số điện", 9);
+    printf(" | "); printPadded("Tiền điện(VNĐ)", 18);
+    printf(" | "); printPadded("Số nước", 9);
+    printf(" | "); printPadded("Tiền nước(VNĐ)", 18);
+    printf(" | "); printPadded("Tổng hóa đơn(VNĐ)", 18);
+    printf(" |\n");
+    
+    printf("%s\n", border);
+
+    for (int p = 1; p <= 5; p++) {
+        sprintf(room_name, "%s%02d", input_tang, p);
+        sprintf(path_file, "Data/Bill/Floor%s/P%s/%s", input_tang, room_name, file_name);
+
+        FILE *f = fopen(path_file, "r");
+        if (f != NULL) {
+            float roomPrice = 0;
+            float electricityNumber = 0;
+            float electricityPrice = 0;
+            float waterNumber = 0;
+            float waterPrice = 0;
+
+            fscanf(f, "%f", &roomPrice);
+            fscanf(f, "%f", &electricityNumber);
+            fscanf(f, "%f", &electricityPrice);
+            fscanf(f, "%f", &waterNumber);
+            fscanf(f, "%f", &waterPrice);
+            fclose(f);
+
+            float totalBill = roomPrice + electricityPrice + waterPrice;
+            has_any_bill = 1;
+
+            char str_roomPrice[32], str_electricityNumber[32], str_electricityPrice[32];
+            char str_waterNumber[32], str_waterPrice[32], str_totalBill[32];
+
+            sprintf(str_roomPrice, "%.0f", roomPrice);
+            sprintf(str_electricityNumber, "%.0f", electricityNumber);
+            sprintf(str_electricityPrice, "%.0f", electricityPrice);
+            sprintf(str_waterNumber, "%.0f", waterNumber);
+            sprintf(str_waterPrice, "%.0f", waterPrice);
+            sprintf(str_totalBill, "%.0f", totalBill);
+
+            printf("| "); printPadded(room_name, 7);
+            printf(" | "); printPadded(str_roomPrice, 17);
+            printf(" | "); printPadded(str_electricityNumber, 9);
+            printf(" | "); printPadded(str_electricityPrice, 18);
+            printf(" | "); printPadded(str_waterNumber, 9);
+            printf(" | "); printPadded(str_waterPrice, 18);
+            printf(" | "); printPadded(str_totalBill, 18);
+            printf(" |\n");
+
+            // Kẻ đường gạch phân tách riêng biệt sau mỗi phòng có hóa đơn
+            printf("%s\n", border);
+        }
+    }
+
+    if (has_any_bill == 0) {
+        printf("       Không có hóa đơn nào trong tháng %02d/%04d tại tầng này.\n", atoi(input_thang), atoi(input_nam));
+    }
+}
 
 // Menu quản lý chính
 void managerMenu() {
@@ -905,8 +1072,11 @@ void managerMenu() {
 			case 7: 
 				searchResident();
 				break;
-			case 8: case 9:
-                printf("\nChưa code chức năng này.\n"); 
+			case 8:
+				createMonthlyBill();
+				break;
+			 case 9:
+                displayFloorBillsByMonth();
                 break;
             case 0: printf("\nThoát chương trình.\n"); break;
             default: printf("\nLựa chọn không hợp lệ!\n");
