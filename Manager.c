@@ -6,6 +6,7 @@
 #include <dirent.h>     
 #include <direct.h>     
 #include <windows.h>  
+#include <time.h>
 
 //Định nghĩa cấu trúc cư dân
 typedef struct {
@@ -733,6 +734,131 @@ void displayRoomOccupantsByFloor() {
     printf("-------------------------------------------------------------------------------------------\n");
 }
 
+// Hàm tìm kiếm cư dân
+void searchResident() {
+    char choice[10];
+    char input_search[64];
+    int found = 0;
+
+    DIR *dir_floorlist = opendir("FloorList");
+    if (dir_floorlist == NULL) {
+        printf("[Lỗi]. Thư mục FloorList không tồn tại trên hệ thống!\n");
+        return;
+    }
+
+    // Vòng lặp yêu cầu nhập lại nếu chọn sai
+    while (1) {
+        printf("\n================ TÌM KIẾM CƯ DÂN ================\n");
+        printf("1. Tìm kiếm bằng số CCCD\n");
+        printf("2. Tìm kiếm bằng Họ và tên\n");
+        printf("-> Nhập lựa chọn của bạn (1 hoặc 2): ");
+        fgets(choice, sizeof(choice), stdin);
+        trimNewline(choice);
+
+        if (strcmp(choice, "1") == 0) {
+            printf("-> Nhập số CCCD cần tìm: ");
+            fgets(input_search, sizeof(input_search), stdin);
+            trimNewline(input_search);
+            break; // Nhập đúng thì thoát vòng lặp để xuống bước tìm kiếm
+        } else if (strcmp(choice, "2") == 0) {
+            printf("-> Nhập Họ và tên cần tìm: ");
+            fgets(input_search, sizeof(input_search), stdin);
+            trimNewline(input_search);
+            normalizeName(input_search); 
+            break; // Nhập đúng thì thoát vòng lặp để xuống bước tìm kiếm
+        } else {
+            printf("[Lỗi]. Lựa chọn không hợp lệ! Vui lòng chọn lại (1 hoặc 2).\n");
+        }
+    }
+
+    struct dirent *ent_floorlist;
+    while ((ent_floorlist = readdir(dir_floorlist)) != NULL) {
+        if (strcmp(ent_floorlist->d_name, ".") == 0 || strcmp(ent_floorlist->d_name, "..") == 0) {
+            continue;
+        }
+
+        char path_floor[512];
+        sprintf(path_floor, "FloorList/%s", ent_floorlist->d_name);
+        
+        DIR *dir_floor = opendir(path_floor);
+        if (dir_floor == NULL) continue;
+
+        struct dirent *ent_floor;
+        while ((ent_floor = readdir(dir_floor)) != NULL) {
+            if (strcmp(ent_floor->d_name, ".") == 0 || strcmp(ent_floor->d_name, "..") == 0) {
+                continue;
+            }
+
+            char path_room[512];
+            sprintf(path_room, "%s/%s", path_floor, ent_floor->d_name);
+
+            DIR *dir_room = opendir(path_room);
+            if (dir_room == NULL) continue;
+
+            struct dirent *ent_room;
+            while ((ent_room = readdir(dir_room)) != NULL) {
+                if (strcmp(ent_room->d_name, ".") == 0 || strcmp(ent_room->d_name, "..") == 0) {
+                    continue;
+                }
+
+                char path_file[512];
+                sprintf(path_file, "%s/%s", path_room, ent_room->d_name);
+
+                if (strcmp(choice, "1") == 0) {
+                    char cccd_from_filename[32];
+                    strcpy(cccd_from_filename, ent_room->d_name);
+                    
+                    char *dot = strrchr(cccd_from_filename, '.');
+                    if (dot != NULL) *dot = '\0';
+
+                    if (strcmp(input_search, cccd_from_filename) == 0) {
+                        ResidentAccount temp_acc;
+                        FILE *f_read = fopen(path_file, "r");
+                        if (f_read != NULL) {
+                            fgets(temp_acc.password, sizeof(temp_acc.password), f_read);
+                            fgets(temp_acc.fullName, sizeof(temp_acc.fullName), f_read);
+                            trimNewline(temp_acc.fullName);
+                            fclose(f_read);
+                        }
+
+                        printf("\n[Tìm thấy]. Cư dân: %s\n", temp_acc.fullName);
+                        printf("-> Vị trí: %s\n", ent_floor->d_name);
+                        found = 1;
+                        break; 
+                    }
+                }
+                else if (strcmp(choice, "2") == 0) {
+                    FILE *f = fopen(path_file, "r");
+                    if (f != NULL) {
+                        ResidentAccount temp_acc;
+                        fgets(temp_acc.password, sizeof(temp_acc.password), f); 
+                        fgets(temp_acc.fullName, sizeof(temp_acc.fullName), f); 
+                        fgets(temp_acc.cccd, sizeof(temp_acc.cccd), f);
+                        fclose(f);
+
+                        trimNewline(temp_acc.fullName);
+                        trimNewline(temp_acc.cccd);
+
+                        if (strcmp(input_search, temp_acc.fullName) == 0) {
+                            printf("\n[Tìm thấy]. Cư dân: %s (CCCD: %s)\n", temp_acc.fullName, temp_acc.cccd);
+                            printf("-> Vị trí: %s\n", ent_floor->d_name);
+                            found = 1;
+                        }
+                    }
+                }
+            }
+            closedir(dir_room);
+            if (found && strcmp(choice, "1") == 0) break; 
+        }
+        closedir(dir_floor);
+        if (found && strcmp(choice, "1") == 0) break;
+    }
+    closedir(dir_floorlist);
+
+    if (!found) {
+        printf("\n[Kết quả]. Không tìm thấy cư dân nào khớp với thông tin đã nhập trên hệ thống!\n");
+    }
+}
 // Menu quản lý chính
 void managerMenu() {
     int choice;
@@ -780,7 +906,10 @@ void managerMenu() {
 			case 6:
 				displayRoomOccupantsByFloor();
 				break;
-			case 7: case 8: case 9:
+			case 7: 
+				searchResident();
+				break;
+			case 8: case 9:
                 printf("\nChưa code chức năng này.\n"); 
                 break;
             case 0: printf("\nThoát chương trình.\n"); break;
