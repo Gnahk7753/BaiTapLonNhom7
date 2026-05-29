@@ -15,12 +15,22 @@ int main () {
     createDataFolder();
 
     //Tạo vòng lặp
-    char *mainMenu[] = {"Đăng nhập với tư cách: Admin", "Đăng nhập với tư cách: Quản lý", "Đăng nhập với tư cách: Cư dân", "Thoát"};
+    char *mainMenu[] = {
+        "Đăng nhập với tư cách: Admin", 
+        "Đăng nhập với tư cách: Quản lý", 
+        "Đăng nhập với tư cách: Cư dân", 
+        "Thoát",
+    };
+
+    //Lấy số lượng phần tử trong mảng mainMenu
+    int size = sizeof(mainMenu) / sizeof(mainMenu[0]);
+
+    //Vòng lặp chính
     while (1) {
         
         //Lựa chọn loại tài khoản muốn đăng nhập
         hideCursor();
-        int selected = menuLogin(mainMenu, 4);
+        int selected = menuLogin(mainMenu, size);
 
         //Dùng switch case cho từng trường hợp đặng nhập
         switch (selected) {

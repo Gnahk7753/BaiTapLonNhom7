@@ -16,7 +16,7 @@ void saveHistory(const char action[]) {
 
     if (file == NULL) {
 
-        printf("Khong the mo file lich su!\n");
+        printf("Không thể mở file lịch sử!\n");
         return;
     }
 
@@ -58,7 +58,7 @@ int checkAccount(char filePath[], char username[], char password[]) {
 
     if (file == NULL) {
 
-        printf("Khong mo duoc file!\n");
+        printf("Không mở được file!\n");
         return 0;
     }
 
@@ -90,13 +90,13 @@ void displayResidentInfo(Resident resident) {
 
     printf("\n========== THONG TIN CU DAN ==========\n");
 
-    printf("Ten           : %s\n", resident.fullName);
+    printf("Tên           : %s\n", resident.fullName);
     printf("CCCD          : %s\n", resident.citizenId);
-    printf("Nam sinh      : %d\n", resident.birthYear);
-    printf("Gioi tinh     : %s\n", resident.gender);
-    printf("Que quan      : %s\n", resident.hometown);
-    printf("So dien thoai : %s\n", resident.phone);
-    printf("Phong dang o  : %s\n", resident.room);
+    printf("Năm sinh      : %d\n", resident.birthYear);
+    printf("Giới tính     : %s\n", resident.gender);
+    printf("Quê quán      : %s\n", resident.hometown);
+    printf("Số điện thoại : %s\n", resident.phone);
+    printf("Phòng đang ở  : %s\n", resident.room);
 
     printf("======================================\n");
 }
@@ -111,25 +111,25 @@ void editPhoneNumber(Resident *resident) {
     char newPhone[15];
     int confirm;
 
-    printf("\nNhap so dien thoai moi: ");
+    printf("\nNhập số điện thoại mới: ");
     scanf("%s", newPhone);
 
     // Xác nhận thay đổi
-    printf("Xac nhan thay doi? (1.Co / 0.Khong): ");
+    printf("Xác nhận thay đổi? (1.Có / 0.Không): ");
     scanf("%d", &confirm);
 
     if (confirm == 1) {
 
         strcpy(resident->phone, newPhone);
 
-        printf("Cap nhat so dien thoai thanh cong!\n");
+        printf("Cập nhật số điện thoại thành công!\n");
 
         // Lưu lịch sử thay đổi
-        saveHistory("Cu dan thay doi so dien thoai");
+        saveHistory("Cư dân thay đổi số điện thoại");
     }
     else {
 
-        printf("Da huy thay doi!\n");
+        printf("Đã huỷ thay đổi!\n");
     }
 }
 
@@ -140,8 +140,8 @@ void editPhoneNumber(Resident *resident) {
 */
 void showRestrictedMessage() {
 
-    printf("\nChi quan ly moi duoc thay doi thong tin nay.\n");
-    printf("Vui long lien he quan ly de duoc ho tro.\n");
+    printf("\nChỉ quản lý mới được thay đổi thông tin này.\n");
+    printf("Vui lòng liên hệ quản lý để được hỗ trợ.\n");
 }
 
 
@@ -155,35 +155,35 @@ void changePassword(Resident *resident) {
     char newPassword[50];
     int confirm;
 
-    printf("\nNhap mat khau hien tai: ");
+    printf("\nNhập mật khẩu hiện tại: ");
     scanf("%s", oldPassword);
 
     // Kiểm tra mật khẩu cũ
     if (strcmp(oldPassword, resident->password) != 0) {
 
-        printf("Mat khau khong dung!\n");
+        printf("Mật khẩu không đúng!\n");
         return;
     }
 
-    printf("Nhap mat khau moi: ");
+    printf("Nhập mật khẩu mới: ");
     scanf("%s", newPassword);
 
     // Xác nhận đổi mật khẩu
-    printf("Xac nhan doi mat khau? (1.Co / 0.Khong): ");
+    printf("Xác nhận đổi mật khẩu? (1.Có / 0.Không): ");
     scanf("%d", &confirm);
 
     if (confirm == 1) {
 
         strcpy(resident->password, newPassword);
 
-        printf("Doi mat khau thanh cong!\n");
+        printf("Đổi mật khẩu thành công!\n");
 
         // Lưu lịch sử thay đổi
-        saveHistory("Cu dan thay doi mat khau");
+        saveHistory("Cư dân thay đổi mật khẩu");
     }
     else {
 
-        printf("Da huy doi mat khau!\n");
+        printf("Đã huỷ đổi mật khẩu!\n");
     }
 }
 
@@ -194,7 +194,7 @@ void changePassword(Resident *resident) {
 */
 void viewResidentsInRoom(Resident residents[], int size, char room[]) {
 
-    printf("\n===== DANH SACH CU DAN PHONG %s =====\n", room);
+    printf("\n===== DANH SÁCH CƯ DÂN PHÒNG %s =====\n", room);
 
     for (int i = 0; i < size; i++) {
 
@@ -219,24 +219,24 @@ void viewRoomBill(char room[]) {
     int waterNumber = 15;
     int waterMoney = 180000;
 
-    printf("\n========== HOA DON PHONG ==========\n");
+    printf("\n========== HÓA DƠN PHÒNG ==========\n");
 
-    printf("Phong           : %s\n", room);
+    printf("Phòng           : %s\n", room);
 
     // 1. Tiền phòng
-    printf("1. Tien phong   : %d VND\n", roomFee);
+    printf("1. Tiền phòng   : %d VND\n", roomFee);
 
     // 2. Số điện
-    printf("2. So dien      : %d kWh\n", electricNumber);
+    printf("2. Số điện      : %d kWh\n", electricNumber);
 
     // 3. Tiền điện
-    printf("3. Tien dien    : %d VND\n", electricMoney);
+    printf("3. Tiền điện    : %d VND\n", electricMoney);
 
     // 4. Số nước
-    printf("4. So nuoc      : %d m3\n", waterNumber);
+    printf("4. Số nước      : %d m3\n", waterNumber);
 
     // 5. Tiền nước
-    printf("5. Tien nuoc    : %d VND\n", waterMoney);
+    printf("5. Tiền nước    : %d VND\n", waterMoney);
 
     printf("===================================\n");
 }
@@ -252,17 +252,17 @@ void residentMenu(Resident *resident, Resident residents[], int size) {
 
     do {
 
-        printf("\n========== MENU CU DAN ==========\n");
+        printf("\n========== MENU CƯ DÂN ==========\n");
 
-        printf("1. Hien thi thong tin cu dan\n");
-        printf("2. Chinh sua so dien thoai\n");
-        printf("3. Doi mat khau\n");
-        printf("4. Chinh sua thong tin khac\n");
-        printf("5. Xem danh sach cu dan cung phong\n");
-        printf("6. Xem hoa don phong\n");
-        printf("0. Thoat\n");
+        printf("1. Hiển thị thông tin cư dân\n");
+        printf("2. Chỉnh sửa số điện thoại\n");
+        printf("3. Đổi mật khẩu\n");
+        printf("4. Chỉnh sửa thông tin khác\n");
+        printf("5. Xem danh sách cư dân cùng phòng\n");
+        printf("6. Xem hoá đơn phòng\n");
+        printf("0. Thoát\n");
 
-        printf("Nhap lua chon: ");
+        printf("Nhập lựa chọn: ");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -292,11 +292,11 @@ void residentMenu(Resident *resident, Resident residents[], int size) {
                 break;
 
             case 0:
-                printf("Da thoat menu!\n");
+                printf("Đã thoát menu!\n");
                 break;
 
             default:
-                printf("Lua chon khong hop le!\n");
+                printf("Lựa chọn không hợp lệ!\n");
         }
 
     } while (choice != 0);
