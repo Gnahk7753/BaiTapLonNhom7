@@ -624,7 +624,7 @@ void deleteResidentAccount() {
     }
 }
 
-// Hàm bổ trợ in chuỗi UTF-8 kèm khoảng trắng chuẩn visual (Chống lệch hàng khi có dấu tiếng Việt)
+// Hàm kẻ bảng chuẩn
 void printPadded(const char *str, int width) {
     int chars = MultiByteToWideChar(CP_UTF8, 0, str, -1, NULL, 0) - 1;
     if (chars < 0) chars = 0;
@@ -645,20 +645,24 @@ void displayRoomOccupantsByFloor() {
     struct dirent *entry;
     DIR *dir;
 
+    // Chuỗi khung viền bảng định hình theo đúng kích thước các cột
+    char border[] = "+---------+---------------------------+-----------------+------------+------------+-----------------+";
+
     printf("\n================ XEM DANH SÁCH CÁC PHÒNG ================\n");
     printf("-> Chọn tầng muốn hiển thị danh sách phòng: ");
     fgets(input_tang, sizeof(input_tang), stdin);
     trimNewline(input_tang);
 
     printf("\nTầng %s\n", input_tang);
-    printf("-------------------------------------------------------------------------------------------\n");
-    printPadded("Phòng", 7); printf(" ");
-    printPadded("Họ và tên", 25); printf(" ");
-    printPadded("CCCD", 15); printf(" ");
-    printPadded("Năm sinh", 10); printf(" ");
-    printPadded("Giới tính", 10); printf(" ");
-    printPadded("Số điện thoại", 15); printf("\n");
-    printf("-------------------------------------------------------------------------------------------\n");
+    printf("%s\n", border);
+    printf("| "); printPadded("Phòng", 7);
+    printf(" | "); printPadded("Họ và tên", 25);
+    printf(" | "); printPadded("CCCD", 15);
+    printf(" | "); printPadded("Năm sinh", 10);
+    printf(" | "); printPadded("Giới tính", 10);
+    printf(" | "); printPadded("Số điện thoại", 15);
+    printf(" |\n");
+    printf("%s\n", border);
 
     for (int p = 1; p <= 5; p++) {
         sprintf(room_dir_path, "FloorList/Floor%s/P%s0%d", input_tang, input_tang, p);
@@ -680,58 +684,46 @@ void displayRoomOccupantsByFloor() {
             
             FILE *f = fopen(file_path, "r");
             if (f != NULL) {
-                fgets(occupant.password, sizeof(occupant.password), f); 
-				trimNewline(occupant.password);
-                
-				fgets(occupant.fullName, sizeof(occupant.fullName), f); 
-				trimNewline(occupant.fullName);
-                
-				fgets(occupant.cccd, sizeof(occupant.cccd), f);         
-				trimNewline(occupant.cccd);
-                
-				fgets(occupant.year, sizeof(occupant.year), f);         
-				trimNewline(occupant.year);
-                
-				fgets(occupant.gender, sizeof(occupant.gender), f);     
-				trimNewline(occupant.gender);
-                
-				fgets(occupant.province, sizeof(occupant.province), f); 
-				trimNewline(occupant.province);
-                
-				fgets(occupant.phone, sizeof(occupant.phone), f);       
-				trimNewline(occupant.phone);
-                
-				fclose(f);
+                fgets(occupant.password, sizeof(occupant.password), f); trimNewline(occupant.password);
+                fgets(occupant.fullName, sizeof(occupant.fullName), f); trimNewline(occupant.fullName);
+                fgets(occupant.cccd, sizeof(occupant.cccd), f);         trimNewline(occupant.cccd);
+                fgets(occupant.year, sizeof(occupant.year), f);         trimNewline(occupant.year);
+                fgets(occupant.gender, sizeof(occupant.gender), f);     trimNewline(occupant.gender);
+                fgets(occupant.province, sizeof(occupant.province), f); trimNewline(occupant.province);
+                fgets(occupant.phone, sizeof(occupant.phone), f);       trimNewline(occupant.phone);
+                fclose(f);
 
                 if (strlen(occupant.phone) == 0) {
                     strcpy(occupant.phone, "Không có");
                 }
 
                 if (has_occupant == 0) {
-                    printPadded(room_name, 7); printf(" ");
-                    printPadded(occupant.fullName, 25); printf(" ");
-                    printPadded(occupant.cccd, 15); printf(" ");
-                    printPadded(occupant.year, 10); printf(" ");
-                    printPadded(occupant.gender, 10); printf(" ");
-                    printPadded(occupant.phone, 15); printf("\n");
+                    printf("| "); printPadded(room_name, 7);
+                    printf(" | "); printPadded(occupant.fullName, 25);
+                    printf(" | "); printPadded(occupant.cccd, 15);
+                    printf(" | "); printPadded(occupant.year, 10);
+                    printf(" | "); printPadded(occupant.gender, 10);
+                    printf(" | "); printPadded(occupant.phone, 15);
+                    printf(" |\n");
                     has_occupant = 1; 
                 } else {
-                    printPadded("", 7); printf(" ");
-                    printPadded(occupant.fullName, 25); printf(" ");
-                    printPadded(occupant.cccd, 15); printf(" ");
-                    printPadded(occupant.year, 10); printf(" ");
-                    printPadded(occupant.gender, 10); printf(" ");
-                    printPadded(occupant.phone, 15); printf("\n");
+                    printf("| "); printPadded("", 7);
+                    printf(" | "); printPadded(occupant.fullName, 25);
+                    printf(" | "); printPadded(occupant.cccd, 15);
+                    printf(" | "); printPadded(occupant.year, 10);
+                    printf(" | "); printPadded(occupant.gender, 10);
+                    printf(" | "); printPadded(occupant.phone, 15);
+                    printf(" |\n");
                 }
             }
         }
         closedir(dir); 
 
+        // Kẻ đường gạch đóng khung sau khi kết thúc một phòng có người ở
         if (has_occupant == 1) {
-            printf("....... ......................... ............... .......... .......... ...............\n");
+            printf("%s\n", border);
         }
     }
-    printf("-------------------------------------------------------------------------------------------\n");
 }
 
 // Hàm tìm kiếm cư dân
@@ -859,6 +851,10 @@ void searchResident() {
         printf("\n[Kết quả]. Không tìm thấy cư dân nào khớp với thông tin đã nhập trên hệ thống!\n");
     }
 }
+
+// Hàm nhập thông tin số điện, số nước
+
+
 // Menu quản lý chính
 void managerMenu() {
     int choice;
