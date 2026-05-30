@@ -1,40 +1,55 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-//Hàm đổi màu chữ
-void setColor(int color);
+#include <stdio.h>
 
-//Hàm di chuyển con trỏ
+// ================= CONSOLE =================
 void gotoxy(int x, int y);
+void setColor(int color);
+void hideCursor(void);
+void showCursor(void);
 
-//Tạo nơi chứa dữ liệu Tỉnh Thành
-void createProvinceFolder();
+// ================= FOLDER =================
+void createDataFolder(void);
+void createProvinceFolder(void);
+void createAccountFolder(void);
+void createFloorList(void);
+void createBill(void);
 
-//Tạo nơi chứa FloorList
-void createFloorList();
+// ================= HISTORY =================
+void saveHistory(char role[], char status[],
+                 char action[], char target[]);
 
-//Tạo nơi chứa Bill
-void createBill();
-
-//Kiểm tra folder Data có tồn tại không, nếu không thì tạo
-void createDataFolder();
-
-//Đếm ký tự UTF-8 gần đúng
+// ================= STRING =================
 int utf8len(const char *s);
+void printContent(char content[], int num, int choice);
 
-//Hàm hiển thị menu và điều hướng mũi tên để chọn
-int menuLogin(char *items[], int size);
+int checkUsername(char username[]);
+int checkDuplicateUsername(char newUsername[], char path[]);
+int checkDuplicateUsernameForResident(char username[]);
 
-//Ẩn con trỏ
-void hideCursor();
+int isOnlyLetter(char str[]);
+int checkPassword(char password[]);
+int checkPhoneNumber(char phone[]);
 
-//Hiện con trỏ
-void showCursor();
+int isAllDigits(char *s);
 
-//Lưu lịch sử thay đổi
-void saveHistory(char role[], char status[], char action[], char target[]);
+// ================= CCCD =================
+int validProvince(int CCCD);
 
-//In chữ LOGIN ADMIN
-void printAdminBanner();
+int checkDuplicateCCCD(char CCCD[]);
+
+int checkCCCD(char year[],
+              char province[],
+              char CCCD[],
+              char gender[]);
+
+int checkCCCDOnly(char year[],
+                  char province[],
+                  char CCCD[],
+                  char gender[]);
+
+// ================= UI =================
+void logout();
 
 #endif

@@ -1,5 +1,6 @@
 //Thư viện sử dụng
 #include "Resident.h"
+#include "Utils.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,60 +25,6 @@ typedef struct Resident {
     char phone[20];
 } Resident;
 
-//Xóa
-//Đếm ký tự UTF-8 gần đúng
-int utf8len(const char *s) {
-    int len = 0;
-    while (*s) {
-        //Byte không phải continuation byte
-        if ((*s & 0xC0) != 0x80) {
-            len++;
-        }
-        s++;
-    }
-    return len;
-}
-
-//Hàm di chuyển con trỏ
-void gotoxy(int x, int y) {
-
-    COORD c;
-
-    c.X = x;
-    c.Y = y;
-
-    SetConsoleCursorPosition(
-        GetStdHandle(STD_OUTPUT_HANDLE),
-        c
-    );
-}
-
-//Hàm đổi màu chữ
-void setColor(int color) {
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-}
-
-//Hàm in nội dung
-void printContent(char content[], int num, int choice) {
-
-    if (num == choice) {
-        setColor(11);
-        printf("   >> [%d]. %s\n", num, content);
-        setColor(7);
-    } else {
-        printf("       [%d]. %s\n", num, content);
-    }
-}
-
-//Hàm ẩn con trỏ
-void hideCursor() {
-
-    CONSOLE_CURSOR_INFO cursorInfo;
-    GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
-    cursorInfo.bVisible = 0; // Ẩn con trỏ
-    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
-}
-
 //Hàm lấy thông tin cá nhân
 void getPersonalInfo(Resident *resident, int *residentFloor, int *residentRoom) {
 
@@ -85,7 +32,7 @@ void getPersonalInfo(Resident *resident, int *residentFloor, int *residentRoom) 
     for (int floor = 1; floor <= 5; floor++) {
         for (int room = 1; room <= 5; room++) {
             char path[256];
-            sprintf(path, "FloorList/Floor%d/P%d%02d/%s.txt", floor, floor, room, "gnahk");
+            sprintf(path, "FloorList/Floor%d/P%d%02d/%s.txt", floor, floor, room, resident->username);
             FILE *file = fopen(path, "r");
             if (file != NULL) {
                 //Đọc thông tin cá nhân từ file
@@ -103,7 +50,7 @@ void getPersonalInfo(Resident *resident, int *residentFloor, int *residentRoom) 
 
     //Tạo path đầy đủ đến đường dẫn
     char path[256];
-    sprintf(path, "FloorList/Floor%d/P%d%02d/%s.txt", *residentFloor, *residentFloor, *residentRoom, resident[0].username);
+    sprintf(path, "FloorList/Floor%d/P%d%02d/%s.txt", *residentFloor, *residentFloor, *residentRoom, resident->username);
 
     //Mở file để đọc thông tin cá nhân
     FILE *f = fopen(path, "r");
@@ -141,13 +88,13 @@ void printPersonalInfo(Resident resident, int residentFloor, int residentRoom) {
     printf("██║██║ ╚████║██║     ╚██████╔╝██║  ██║██║ ╚═╝ ██║██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║\n");
     printf("╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝\n\n\n");
 
-    printf("       Tên: %s\n", resident.name);
-    printf("       CCCD: %s\n", resident.CCCD);
-    printf("       Năm sinh: %s\n", resident.year);
-    printf("       Giới tính: %s\n", resident.gender);
-    printf("       Quê quán: %s\n", resident.province);
-    printf("       Số điện thoại: %s\n", resident.phone);
-    printf("       Đang ở: P%d%02d\n", residentFloor, residentRoom);
+    printf("       Tên            : %s\n", resident.name);
+    printf("       CCCD           : %s\n", resident.CCCD);
+    printf("       Năm sinh       : %s\n", resident.year);
+    printf("       Giới tính      : %s\n", resident.gender);
+    printf("       Quê quán       : %s\n", resident.province);
+    printf("       Số điện thoại  : %s\n", resident.phone);
+    printf("       Đang ở         : P%d%02d\n", residentFloor, residentRoom);
 
     //Nhấn enter hoặc esc để quay lại
     printf("\nNhấn Enter hoặc Esc để quay lại\n");
@@ -157,26 +104,6 @@ void printPersonalInfo(Resident resident, int residentFloor, int residentRoom) {
     while (key != ENTER && key != ESC) {
         key = getch();
     }
-}
-
-int checkPhoneNumber(char phone[]) {
-    int length = strlen(phone);
-    
-    //Số điện thoại phải có 10 chữ số và bắt đầu bằng số 0
-    if (length != 10) {
-        return 0;
-    }
-    if (phone[0] != '0') {
-        return 0;
-    }
-
-    //Kiểm tra tất cả ký tự phải là số
-    for (int i = 0; i < length; i++) {
-        if (phone[i] < '0' || phone[i] > '9') {
-            return 0;
-        }
-    }
-    return 1;
 }
 
 /*
@@ -238,7 +165,7 @@ void changePhone(Resident *resident, int residentFloor, int residentRoom) {
         printf("Nhấn Esc để thoát\n");
         
         //Di chuyển con trỏ đến vị trí nhập số điện thoại
-        gotoxy(30 + strlen(newPhone) + 1, 9);
+        gotoxy(29 + strlen(newPhone) + 1, 9);
         
         //Điều hướng mũi tên
         key = getch();
@@ -330,31 +257,6 @@ void changePhone(Resident *resident, int residentFloor, int residentRoom) {
             }
         }
     }
-}
-
-//Hàm kiểm tra tính hợp lệ của mật khẩu
-int checkPassword(char password[]) {
-    int length = strlen(password);
-    
-    //Mật khẩu phải có ít nhất 8 ký tự
-    if (length < 8) {
-        return 0;
-    }
-
-    //Mật khẩu phải chứa ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt
-    int hasUpper = 0, hasLower = 0, hasDigit = 0, hasSpecial = 0;
-    for (int i = 0; i < length; i++) {
-        if (password[i] >= 'A' && password[i] <= 'Z') {
-            hasUpper = 1;
-        } else if (password[i] >= 'a' && password[i] <= 'z') {
-            hasLower = 1;
-        } else if (password[i] >= '0' && password[i] <= '9') {
-            hasDigit = 1;
-        } else {
-            hasSpecial = 1;
-        }
-    }
-    return hasUpper && hasLower && hasDigit && hasSpecial;
 }
 
 /*
@@ -839,36 +741,6 @@ void viewBill(int residentFloor, int residentRoom) {
 
     //Nhận phím từ người dùng
     printf("\nNhấn Enter hoặc Esc để quay lại\n");
-    int key = getch();
-    while (key != ENTER && key != ESC) {
-        key = getch();
-    }
-}
-
-/*
-    Đăng xuất
-                */
-void logout() {
-
-    //Làm sạch màn hình
-    system("cls");
-
-    //In chữ LOGOUT
-    printf("\n");
-    printf("██╗      ██████╗  ██████╗  ██████╗  ██████╗ ██╗   ██╗████████╗\n");
-    printf("██║     ██╔═══██╗██╔════╝ ██╔═══██╗██╔═══██╗██║   ██║╚══██╔══╝\n");
-    printf("██║     ██║   ██║██║  ███╗██║   ██║██║   ██║██║   ██║   ██║   \n");
-    printf("██║     ██║   ██║██║   ██║██║   ██║██║   ██║██║   ██║   ██║   \n");
-    printf("███████╗╚██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝   ██║   \n");
-    printf("╚══════╝ ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝    ╚═╝   \n\n\n");
-
-    //In thông báo
-    setColor(10);
-    printf("       Đăng xuất thành công!\n");
-    setColor(7);
-
-    //Đợi người dùng nhấn Enter hoặc Esc
-    printf("\nNhấn Enter hoặc Esc để thoát\n");
     int key = getch();
     while (key != ENTER && key != ESC) {
         key = getch();

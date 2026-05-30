@@ -17,3 +17,23 @@
 [ADMIN][ERROR][27/05/2026 16:45:42] LOGIN: The Admin with the name 'gnahk' attempted to log in with the password 'gnahk1234'.
 [ADMIN][SUCCESS][27/05/2026 16:46:31] LOGIN: Admin with the name 'gnahk' has successfully logged in.
 [MANAGE][SUCCESS][27/05/2026 16:49:50] LOGIN: Manage with the name 'gnahk' has successfully logged in.
+[ADMIN][SUCCESS][30/05/2026 16:32:19] LOGIN: Admin with the name 'gnahk' has successfully logged in.
+[MANAGE][SUCCESS][30/05/2026 16:40:58] LOGIN: Manage with the name 'Khang' has successfully logged in.
+[MANAGE][ERROR][30/05/2026 16:45:21] LOGIN: The Manage with the name 'Khang' attempted to log in with the password 'Abcd123@a'.
+[MANAGE][SUCCESS][30/05/2026 16:45:25] LOGIN: Manage with the name 'Khang' has successfully logged in.
+[MANAGE][SUCCESS][30/05/2026 16:48:34] LOGIN: Manage with the name 'Khang' has successfully logged in.
+[MANAGE][SUCCESS][30/05/2026 16:51:35] LOGIN: Manage with the name 'gnahk' has successfully logged in.
+[MANAGE][SUCCESS][30/05/2026 16:58:01] LOGIN: Manage with the name 'gnahk' has successfully logged in.
+[MANAGE][SUCCESS][30/05/2026 16:59:27] LOGIN: Manage with the name 'gnahk' has successfully logged in.
+[RESIDENT][ERROR][30/05/2026 17:00:04] LOGIN: The Resident with the name 'gnahk' attempted to log in with the password 'Abcd123@'.
+[RESIDENT][ERROR][30/05/2026 17:00:08] LOGIN: The Resident with the name 'gnahk' attempted to log in with the password 'Abcd1234@'.
+[RESIDENT][SUCCESS][30/05/2026 17:00:55] LOGIN: Resident with the name 'gnahk2' has successfully logged in.
+[RESIDENT][ERROR][30/05/2026 17:01:27] LOGIN: The Resident with the name 'gnahk' attempted to log in with the password 'Gnahk7753@'.
+[RESIDENT][SUCCESS][30/05/2026 17:01:34] LOGIN: Resident with the name 'gnahk2' has successfully logged in.
+[RESIDENT][ERROR][30/05/2026 17:04:25] LOGIN: The Resident with the name 'gnahk' attempted to log in with the password 'Gnahk7753@'.
+[RESIDENT][SUCCESS][30/05/2026 17:04:30] LOGIN: Resident with the name 'gnahk2' has successfully logged in.
+[RESIDENT][SUCCESS][30/05/2026 17:07:48] LOGIN: Resident with the name 'gnahk2' has successfully logged in.
+[ADMIN][SUCCESS][30/05/2026 17:08:22] LOGIN: Admin with the name 'Khang' has successfully logged in.
+[MANAGE][SUCCESS][30/05/2026 17:08:43] LOGIN: Manage with the name 'gnahk' has successfully logged in.
+[RESIDENT][ERROR][30/05/2026 17:10:16] LOGIN: The Resident with the name 'gnahk' attempted to log in with the password 'Gnahk7753@'.
+[RESIDENT][SUCCESS][30/05/2026 17:10:21] LOGIN: Resident with the name 'gnahk2' has successfully logged in.
