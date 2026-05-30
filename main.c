@@ -35,7 +35,7 @@ int main () {
         //Dùng switch case cho từng trường hợp đặng nhập
         switch (selected) {
             
-            //Đăng nhập với tư cách Admin
+            //Đăng nhập với từ tư cách
             case 0:
                 login(0);
                 break;

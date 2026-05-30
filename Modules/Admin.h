@@ -1,7 +1,7 @@
 #ifndef ADMIN_H
 #define ADMIN_H
 
-// Admin module menu
-void adminMenu(const char *adminUsername);
+//Gọi hàm để chạy Admin
+void AdminLogin(char username[]);
 
 #endif

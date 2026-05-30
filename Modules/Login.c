@@ -2,6 +2,8 @@
 #include "Login.h"
 #include "Utils.h"
 #include "Admin.h"
+#include "Manage.h"
+#include "Resident.h"
 #include <stdio.h>      // printf
 #include <stdlib.h>     // system("cls")
 #include <conio.h>      // getch()
@@ -314,7 +316,7 @@ void login(int select) {
                                 saveHistory("ADMIN", "SUCCESS", "LOGIN", path);
 
                                 //Chuyển sang các tính năng của admin
-                                adminMenu(username);
+                                AdminLogin(username);
                                 return;
                             } 
                             //Nếu sai tài khoản hoặc mật khẩu
@@ -335,7 +337,8 @@ void login(int select) {
                                 saveHistory("MANAGE", "SUCCESS", "LOGIN", path);
 
                                 //Chuyển sang các tính năng của quản lý
-
+                                ManageLogin(username);
+                                return;
                             }
                             //Nếu sai tài khoản hoặc mật khẩu
                             else {
@@ -355,7 +358,8 @@ void login(int select) {
                                 saveHistory("RESIDENT", "SUCCESS", "LOGIN", path);
 
                                 //Chuyển sang các tính năng của cư dân
-
+                                ResidentLogin(username);
+                                return;
                             }
                             //Nếu sai tài khoản hoặc mật khẩu
                             else {
