@@ -277,6 +277,19 @@ void showCursor() {
     SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
 }
 
+//Đếm ký tự UTF-8 gần đúng
+int utf8len(const char *s) {
+    int len = 0;
+    while (*s) {
+        //Byte không phải continuation byte
+        if ((*s & 0xC0) != 0x80) {
+            len++;
+        }
+        s++;
+    }
+    return len;
+}
+
 //Lưu lịch sử thay đổi
 void saveHistory(char role[], char status[], char action[], char target[]) {
 
@@ -301,19 +314,6 @@ void saveHistory(char role[], char status[], char action[], char target[]) {
 
     //Đóng file
     fclose (f);
-}
-
-//Đếm ký tự UTF-8 gần đúng
-int utf8len(const char *s) {
-    int len = 0;
-    while (*s) {
-        //Byte không phải continuation byte
-        if ((*s & 0xC0) != 0x80) {
-            len++;
-        }
-        s++;
-    }
-    return len;
 }
 
 //Hàm in nội dung

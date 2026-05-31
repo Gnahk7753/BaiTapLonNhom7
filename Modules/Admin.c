@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <ctype.h>
 #include <dirent.h>
+#include <errno.h>
 
 #define KEY_UP 72
 #define KEY_DOWN 80
@@ -222,14 +223,32 @@ void editUsernameAdmin(char username[]) {
 
                 //Rename username
                 if (rename(oldPath, newPath) == 0) {
-                    strcpy(username, newUsername);
-                }
 
-                //In thông báo đổi username thành công
-                setColor(10);
-                printf("\n       Đổi Username thành công!\n");
-                setColor(7);
-                printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+                    //In thông báo đổi username thành công
+                    setColor(10);
+                    printf("\n       Đổi Username thành công!\n");
+                    setColor(7);
+                    printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+
+                    //Lưu lịch sử
+                    char history[256];
+                    sprintf(history, "Admin '%s' đã đổi username của bản thân thành '%s'.", username, newUsername);
+                    saveHistory("ADMIN", "THÀNH CÔNG", "Đổi username", history);
+
+                    strcpy(username, newUsername);
+                } else {
+
+                    //In thông báo đổi username thất bại
+                    setColor(12);
+                    printf("\n       Đổi Username thất bại!\n");
+                    setColor(7);
+                    printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+
+                    //Lưu lịch sử
+                    char history[256];
+                    sprintf(history, "Admin '%s' đã cố gắn đổi username của bản thân thành '%s'.", username, newUsername);
+                    saveHistory("ADMIN", "THẤT BẠI", "Đổi username", history);
+                }    
 
                 //Đợi người dùng nhấn Enter hoặc Esc
                 while (1) {
@@ -372,18 +391,20 @@ void editNameAdmin(Admin *admin) {
                     continue;
                 }
 
-                //Chuẩn hóa tên
+                //Lưu tên cũ
+                char oldName[50];
+                strncpy(oldName, admin->name, sizeof(oldName) - 1);             oldName[sizeof(oldName) - 1] = '\0';
 
-                //Cập nhật mật khẩu mới vào struct admin
+                //Cập nhật tên vào struct admin
                 strncpy(admin->name, newName, sizeof(admin->name) - 1);		admin->name[sizeof(admin->name) - 1] = '\0';
 
-                //Cập nhật mật khẩu mới vào file
+                //Cập nhật tên mới vào file
                 char path[256];
                 sprintf(path, "Data/Account/Admin/%s.txt", admin->username);
                 FILE *f = fopen(path, "w");
                 if (f != NULL) {
                     
-                    //Ghi lại toàn bộ thông tin cá nhân vào file với mật khẩu mới
+                    //Ghi lại toàn bộ thông tin cá nhân vào file với tên mới
                     fprintf(f, "%s\n", admin->password);
                     fprintf(f, "%s\n", admin->name);
                     fprintf(f, "%s\n", admin->CCCD);
@@ -392,13 +413,30 @@ void editNameAdmin(Admin *admin) {
                     fprintf(f, "%s\n", admin->province);
                     fprintf(f, "%s\n", admin->phone);
                     fclose(f);
-                }
 
-                //In thông báo đổi username thành công
-                setColor(10);
-                printf("\n       Đổi tên thành công!\n");
-                setColor(7);
-                printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+                    //In thông báo đổi username thành công
+                    setColor(10);
+                    printf("\n       Đổi tên thành công!\n");
+                    setColor(7);
+                    printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+
+                    //Lưu lịch sử
+                    char history[256];
+                    sprintf(history, "Admin '%s' đã đổi tên bản thân từ '%s' thành '%s'.", admin->username, oldName, admin->name);
+                    saveHistory("ADMIN", "THÀNH CÔNG", "Đổi tên", history);    
+                } else {
+
+                    //In thông báo đổi username thất bại
+                    setColor(12);
+                    printf("\n       Đổi tên thất bại!\n");
+                    setColor(7);
+                    printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+
+                    //Lưu lịch sử
+                    char history[256];
+                    sprintf(history, "Admin '%s' đã cố gắn đổi tên bản thân từ '%s' thành '%s'.", admin->username, oldName, admin->name);
+                    saveHistory("ADMIN", "THẤT BẠI", "Đổi tên", history); 
+                }
 
                 //Đợi người dùng nhấn Enter hoặc Esc
                 while (1) {
@@ -570,6 +608,10 @@ void editPassword(Admin *admin) {
                     fail = 2;
                     continue;
                 }
+                
+                //Lưu mật khẩu cũ
+                char oldPass[50];
+                strncpy(oldPass, oldPassword, sizeof(oldPass) - 1);                     oldPass[sizeof(oldPass) - 1] = '\0';
 
                 //Cập nhật mật khẩu mới vào struct admin
                 strncpy(admin->password, newPassword, sizeof(admin->password) - 1);		admin->password[sizeof(admin->password) - 1] = '\0';
@@ -589,14 +631,32 @@ void editPassword(Admin *admin) {
                     fprintf(f, "%s\n", admin->province);
                     fprintf(f, "%s\n", admin->phone);
                     fclose(f);
-                }
 
-                //In thông báo đổi mật khẩu thành công
-                gotoxy(7, 10);
-                setColor(10);
-                printf("\n       Đổi mật khẩu thành công!\n");
-                setColor(7);
-                printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+                    //In thông báo đổi mật khẩu thành công
+                    gotoxy(7, 10);
+                    setColor(10);
+                    printf("\n       Đổi mật khẩu thành công!\n");
+                    setColor(7);
+                    printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+
+                    //Lưu lịch sử
+                    char history[256];
+                    sprintf(history, "Admin '%s' đã đổi mật khẩu bản thân từ '%s' thành '%s'.", admin->username, oldPass, admin->password);
+                    saveHistory("ADMIN", "THÀNH CÔNG", "Đổi mật khẩu", history);    
+                } else {
+
+                    //In thông báo đổi mật khẩu thất bại
+                    gotoxy(7, 10);
+                    setColor(12);
+                    printf("\n       Đổi mật khẩu thất bại!\n");
+                    setColor(7);
+                    printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+
+                    //Lưu lịch sử
+                    char history[256];
+                    sprintf(history, "Admin '%s' đã cố gắn đổi mật khẩu bản thân từ '%s' thành '%s'.", admin->username, oldPass, admin->password);
+                    saveHistory("ADMIN", "THẤT BẠI", "Đổi mật khẩu", history);    
+                }            
 
                 //Đợi người dùng nhấn Enter hoặc Esc
                 while (1) {
@@ -716,6 +776,10 @@ void editPhoneNumber(Admin *admin) {
                     continue;
                 }
 
+                //Lưu số cũ
+                char oldphone[50];
+                strncpy(oldphone, admin->phone, sizeof(oldphone) - 1);             oldphone[sizeof(oldphone) - 1] = '\0';
+
                 //Cập nhật số điện thoại mới vào struct admin
                 strncpy(admin->phone, newPhone, sizeof(admin->phone) - 1);		admin->phone[sizeof(admin->phone) - 1] = '\0';
 
@@ -734,13 +798,32 @@ void editPhoneNumber(Admin *admin) {
                     fprintf(f, "%s\n", admin->province);
                     fprintf(f, "%s\n", admin->phone);
                     fclose(f);
-                }
 
                 //In thông báo đổi số điện thoại thành công
                 setColor(10);
                 printf("\n       Đổi số điện thoại thành công!\n");
                 setColor(7);
                 printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+
+                //Lưu lịch sử
+                char history[256];
+                sprintf(history, "Admin '%s' đã đổi số điện thoại bản thân từ '%s' thành '%s'.", admin->username, oldphone, admin->phone);
+                saveHistory("ADMIN", "THÀNH CÔNG", "Đổi số điện thoại", history);    
+                } else {
+                
+                    //In thông báo đổi số điện thoại thất bại
+                    setColor(12);
+                    printf("\n       Đổi số điện thoại thất bại!\n");
+                    setColor(7);
+                    printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+
+                    //Lưu lịch sử
+                    char history[256];
+                    sprintf(history, "Admin '%s' đã cố gắn đổi số điện thoại bản thân từ '%s' thành '%s'.", admin->username, oldphone, admin->phone);
+                    saveHistory("ADMIN", "THẤT BẠI", "Đổi số điện thoại", history);  
+                }
+
+                
 
                 //Đợi người dùng nhấn Enter hoặc Esc
                 while (1) {
@@ -863,7 +946,7 @@ void editOtherInfoAdmin (Admin *admin) {
 }
 
 //Tạo tài khoản quản lý
-void createManageAccount() {
+void createManageAccount(char admin[]) {
 
     //Khai báo biến cần thiết
     int choice = 1;
@@ -880,11 +963,11 @@ void createManageAccount() {
     char phone[20] = "";
 
     char *contents[] = {
-        "Nhập username: ",
-        "Nhập tên thật: ",
-        "Nhập mật khẩu: ",
-        "Nhập CCCD: ",
-        "Nhập số điện thoại: ",
+        "Nhập username      : ",
+        "Nhập tên thật      : ",
+        "Nhập mật khẩu      : ",
+        "Nhập CCCD          : ",
+        "Nhập số điện thoại : ",
         "Xác nhận",
     };
 
@@ -1013,19 +1096,19 @@ void createManageAccount() {
 
         //Di chuyển con trỏ
         if(choice == 1) {
-            gotoxy(21 + strlen(username), 9);
+            gotoxy(27 + strlen(username), 9);
         }
         else if(choice == 2) {
-            gotoxy(21 + strlen(name), 10);
+            gotoxy(27 + strlen(name), 10);
         }
         else if(choice == 3) {
-            gotoxy(21 + strlen(password), 11);
+            gotoxy(27 + strlen(password), 11);
         }
         else if(choice == 4) {
-            gotoxy(17 + strlen(CCCD), 12);
+            gotoxy(27 + strlen(CCCD), 12);
         }
         else if(choice == 5) {
-            gotoxy(26 + strlen(phone), 13);
+            gotoxy(27 + strlen(phone), 13);
         }
 
         //Nhận phím
@@ -1152,17 +1235,33 @@ void createManageAccount() {
                     fprintf(f, "%s\n", gender);
                     fprintf(f, "%s\n", province);
                     fprintf(f, "%s\n", phone);
-
                     fclose(f);
+
+                    //Thông báo thành công
+                    gotoxy(26, 13);
+                    setColor(10);
+                    printf("\n       Tạo tài khoản thành công!\n");
+                    setColor(7);
+                    printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+
+                    //Lưu lịch sử
+                    char history[256];
+                    sprintf(history, "Admin '%s' đã tạo tài khoản cho quản lý với username là '%s'.", admin, username);
+                    saveHistory("ADMIN", "THÀNH CÔNG", "Tạo tài khoản", history);    
+                } else {
+
+                    //Thông báo thất bại
+                    gotoxy(26, 13);
+                    setColor(12);
+                    printf("\n       Tạo tài khoản thất bại!\n");
+                    setColor(7);
+                    printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+
+                    //Lưu lịch sử
+                    char history[256];
+                    sprintf(history, "Admin '%s' đã cố gắn tạo tài khoản cho quản lý với username là '%s'.", admin, username);
+                    saveHistory("ADMIN", "THẤT BẠI", "Tạo tài khoản", history);    
                 }
-
-                //Thông báo thành công
-                gotoxy(6, 13);
-                setColor(10);
-                printf("\n       Tạo tài khoản thành công!\n");
-                setColor(7);
-
-                printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
 
                 //Đợi người dùng thoát
                 while (1) {
@@ -1276,7 +1375,7 @@ int saveManageInfo(Manage *manage, char *oldUsername, char *oldCCCD) {
     if(strlen(manage->name) == 0) return 3;
 
     // Chỉ kiểm tra CCCD nếu có nhập
-    if(strlen(manage->CCCD) > 0) {
+    if(strlen(manage->CCCD) == 12) {
 
         // Chỉ báo lỗi nếu trùng với người KHÁC
         if(checkDuplicateCCCD(manage->CCCD) == 1)
@@ -1312,7 +1411,7 @@ int saveManageInfo(Manage *manage, char *oldUsername, char *oldCCCD) {
 }
 
 //Chỉnh sửa thông tin quản lý
-void editManageInfo() {
+void editManageInfo(char admin[]) {
 
     //Khai báo biến cần thiết
     int choice = 1;
@@ -1639,6 +1738,11 @@ void editManageInfo() {
                             //In hưỡng dẫn
                             printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
 
+                            //Lưu lịch sử
+                            char history[256];
+                            sprintf(history, "Admin '%s' đã đổi thông tin của quản lý '%s'.", admin, username);
+                            saveHistory("ADMIN", "THÀNH CÔNG", "Đổi thông tin", history);
+
                             //Đợi người dùng thoát
                             while (1) {
                                 key = getch();
@@ -1893,7 +1997,7 @@ void viewManageList() {
 }
 
 //Xóa tài khoản quản lý
-void deleteManageInfo() {
+void deleteManageInfo(char admin[]) {
 
     //Khai báo biến cần thiết
     int choice = 1;
@@ -2082,10 +2186,20 @@ void deleteManageInfo() {
                                 setColor(10);
                                 printf("      Xóa quản lý \"%s\" thành công!                 \n", username);
                                 setColor(7);
+
+                                //Lưu lịch sử
+                                char history[256];
+                                sprintf(history, "Admin '%s' đã xóa thành công quản lý với username là '%s'.", admin, username);
+                                saveHistory("ADMIN", "THÀNH CÔNG", "Xóa quản lý", history);
                             } else {
                                 setColor(12);
-                                printf("[Fail] Không thể xóa file!\n");
+                                printf("      [Fail] Không thể xóa file!\n");
                                 setColor(7);
+
+                                //Lưu lịch sử
+                                char history[256];
+                                sprintf(history, "Admin '%s' đã xóa thất bại quản lý với username là '%s'.", admin, username);
+                                saveHistory("ADMIN", "THẤT BẠI", "Xóa quản lý", history);   
                             }
 
                             //In hưỡng dẫn
@@ -2132,7 +2246,7 @@ void deleteManageInfo() {
 /*
     Quản lý
               */
-void accountManage() {
+void accountManage(char admin[]) {
 
     //Khai báo hàm cần thiết
     int choice = 1;
@@ -2198,16 +2312,16 @@ void accountManage() {
         else if (key == ENTER) {
             switch (choice) {
                 case 1:
-                    createManageAccount();
+                    createManageAccount(admin);
                     break;
                 case 2:
-                    editManageInfo();
+                    editManageInfo(admin);
                     break;
                 case 3:
                     viewManageList();
                     break;
                 case 4:
-                    deleteManageInfo();
+                    deleteManageInfo(admin);
                     break;
                 case 5:
                     return;
@@ -3034,7 +3148,7 @@ void AdminLogin(char username[]) {
                     editOtherInfoAdmin(&admin);
                     break;
                 case 3:
-                    accountManage();
+                    accountManage(admin.username);
                     break;
                 case 4:
                     viewRoomStatus();

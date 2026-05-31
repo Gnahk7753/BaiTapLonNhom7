@@ -200,6 +200,10 @@ void changePhone(Resident *resident, int residentFloor, int residentRoom) {
                     continue;
                 }
 
+                //Lưu số cũ
+                char oldphone[50];
+                strncpy(oldphone, resident->phone, sizeof(oldphone) - 1);             oldphone[sizeof(oldphone) - 1] = '\0';
+
                 //Cập nhật số điện thoại mới vào struct Resident
                 strncpy(resident->phone, newPhone, sizeof(resident->phone) - 1);		resident->phone[sizeof(resident->phone) - 1] = '\0';
 
@@ -218,13 +222,30 @@ void changePhone(Resident *resident, int residentFloor, int residentRoom) {
                     fprintf(f, "%s\n", resident->province);
                     fprintf(f, "%s\n", resident->phone);
                     fclose(f);
-                }
 
-                //In thông báo đổi số điện thoại thành công
-                setColor(10);
-                printf("\n       Đổi số điện thoại thành công!\n");
-                setColor(7);
-                printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+                    //In thông báo đổi số điện thoại thành công
+                    setColor(10);
+                    printf("\n       Đổi số điện thoại thành công!\n");
+                    setColor(7);
+                    printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+    
+                    //Lưu lịch sử
+                    char history[256];
+                    sprintf(history, "Cư dân '%s' đã tự đổi số điện thoại của mình từ '%s' thành '%s'", resident->username, oldphone, resident->phone);
+                    saveHistory("CƯ DÂN", "THÀNH CÔNG", "Đổi số điện thoại", history);
+                } else {
+
+                    //In thông báo đổi số điện thoại thất bại
+                    setColor(12);
+                    printf("\n       Đổi số điện thoại thất bại!\n");
+                    setColor(7);
+                    printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+
+                    //Lưu lịch sử
+                    char history[256];
+                    sprintf(history, "Cư dân '%s' đã cố gắn tự đổi số điện thoại của mình từ '%s' thành '%s'", resident->username, oldphone, resident->phone);
+                    saveHistory("CƯ DÂN", "THẤT BẠI", "Đổi số điện thoại", history);
+                }
 
                 //Đợi người dùng nhấn Enter hoặc Esc
                 while (1) {
@@ -397,6 +418,10 @@ void changePassword(Resident *resident, int residentFloor, int residentRoom, cha
                     continue;
                 }
 
+                //Lưu mật khẩu cũ
+                char oldPass[50];
+                strncpy(oldPass, resident->password, sizeof(oldPass) - 1);                     oldPass[sizeof(oldPass) - 1] = '\0';
+
                 //Cập nhật mật khẩu mới vào struct Resident
                 strncpy(resident->password, newPassword, sizeof(resident->password) - 1);		resident->password[sizeof(resident->password) - 1] = '\0';
 
@@ -415,14 +440,32 @@ void changePassword(Resident *resident, int residentFloor, int residentRoom, cha
                     fprintf(f, "%s\n", resident->province);
                     fprintf(f, "%s\n", resident->phone);
                     fclose(f);
-                }
 
-                //In thông báo đổi mật khẩu thành công
-                gotoxy(7, 10);
-                setColor(10);
-                printf("\n       Đổi mật khẩu thành công!\n");
-                setColor(7);
-                printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+                    //In thông báo đổi mật khẩu thành công
+                    gotoxy(7, 10);
+                    setColor(10);
+                    printf("\n       Đổi mật khẩu thành công!\n");
+                    setColor(7);
+                    printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+
+                    //Lưu lịch sử
+                    char history[256];
+                    sprintf(history, "Cư dân '%s' đã đổi mật khẩu từ '%s' thành '%s'", resident->username, oldPass, resident->password);
+                    saveHistory("CƯ DÂN", "THÀNH CÔNG", "Đổi mật khẩu", history);
+                } else {
+
+                    //In thông báo đổi mật khẩu thất bại
+                    gotoxy(7, 10);
+                    setColor(12);
+                    printf("\n       Đổi mật khẩu thất bại!\n");
+                    setColor(7);
+                    printf("\nNhấn Enter hoặc Esc để thoát\n                                       \n                                   ");
+
+                    //Lưu lịch sử
+                    char history[256];
+                    sprintf(history, "Cư dân '%s' đã cố gắn đổi mật khẩu từ '%s' thành '%s'", resident->username, oldPass, resident->password);
+                    saveHistory("CƯ DÂN", "THẤT BẠI", "Đổi mật khẩu", history);
+                }
 
                 //Đợi người dùng nhấn Enter hoặc Esc
                 while (1) {

@@ -279,8 +279,8 @@ void login(int select) {
                             //Đúng tài khoản và mật khẩu
                             if (checkLoginAdmin(username, password) == 1) {
                                 //Tạo path để lưu lịch sử đăng nhập
-                                sprintf(path, "Admin with the name '%s' has successfully logged in.", username);
-                                saveHistory("ADMIN", "SUCCESS", "LOGIN", path);
+                                sprintf(path, "Admin với username là '%s' đã đăng nhập thành công.", username);
+                                saveHistory("ADMIN", "THÀNH CÔNG", "Đăng nhập", path);
 
                                 //Chuyển sang các tính năng của admin
                                 AdminLogin(username);
@@ -289,8 +289,8 @@ void login(int select) {
                             //Nếu sai tài khoản hoặc mật khẩu
                             else {
                                 //Tạo path để lưu lịch sử đăng nhập
-                                sprintf(path, "The Admin with the name '%s' attempted to log in with the password '%s'.", username, password);
-                                saveHistory("ADMIN", "ERROR", "LOGIN", path);
+                                sprintf(path, "Người dùng với username là '%s' đã cố gắn đăng nhập tài khoản Admin với mật khẩu '%s'.", username, password);
+                                saveHistory("ADMIN", "THẤT BẠI", "Đăng nhập", path);
 
                                 //In thông báo đăng nhập thất bại
                                 fail = 1;
@@ -300,8 +300,8 @@ void login(int select) {
                             //Đúng tài khoản và mật khẩu
                             if (checkLoginManage(username, password) == 1) {
                                 //Tạo path để lưu lịch sử đăng nhập
-                                sprintf(path, "Manage with the name '%s' has successfully logged in.", username);
-                                saveHistory("MANAGE", "SUCCESS", "LOGIN", path);
+                                sprintf(path, "Quản lý với username '%s' đã đăng nhập thành công.", username);
+                                saveHistory("QUẢN LÝ", "THÀNH CÔNG", "Đăng nhập", path);
 
                                 //Chuyển sang các tính năng của quản lý
                                 ManageLogin(username);
@@ -310,8 +310,8 @@ void login(int select) {
                             //Nếu sai tài khoản hoặc mật khẩu
                             else {
                                 //Tạo path để lưu lịch sử đăng nhập
-                                sprintf(path, "The Manage with the name '%s' attempted to log in with the password '%s'.", username, password);
-                                saveHistory("MANAGE", "ERROR", "LOGIN", path);
+                                sprintf(path, "Người dùng với username là '%s' đã cố gắn đăng nhập tài khoản quản lý với mật khẩu '%s'.", username, password);
+                                saveHistory("QUẢN LÝ", "THẤT BẠI", "Đăng nhập", path);
 
                                 //In thông báo đăng nhập thất bại
                                 fail = 1;
@@ -321,8 +321,8 @@ void login(int select) {
                             //Đúng tài khoản và mật khẩu
                             if (checkLoginResident(username, password) == 1) {
                                 //Tạo path để lưu lịch sử đăng nhập
-                                sprintf(path, "Resident with the name '%s' has successfully logged in.", username);
-                                saveHistory("RESIDENT", "SUCCESS", "LOGIN", path);
+                                sprintf(path, "Cư dân với username '%s' đã đăng nhập thành công.", username);
+                                saveHistory("CƯ DÂN", "THÀNH CÔNG", "Đăng nhập", path);
 
                                 //Chuyển sang các tính năng của cư dân
                                 ResidentLogin(username);
@@ -331,8 +331,8 @@ void login(int select) {
                             //Nếu sai tài khoản hoặc mật khẩu
                             else {
                                 //Tạo path để lưu lịch sử đăng nhập
-                                sprintf(path, "The Resident with the name '%s' attempted to log in with the password '%s'.", username, password);
-                                saveHistory("RESIDENT", "ERROR", "LOGIN", path);
+                                sprintf(path, "Người dùng với username là '%s' đã cố gắn đăng nhập tài khoản cư dân với mật khẩu '%s'.", username, password);
+                                saveHistory("CƯ DÂN", "THẤT BẠI", "Đặng nhập", path);
                                 
                                 //In thông báo đăng nhập thất bại
                                 fail = 1;

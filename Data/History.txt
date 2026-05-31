@@ -1,39 +1,40 @@
-[ADMIN][SUCCESS][25/05/2026 18:34:38] LOGIN: Admin with the name 'gnahk' has successfully logged in.
-[ADMIN][ERROR][25/05/2026 18:34:54] LOGIN: The user with the name 'hacker' attempted to log in with the password 'hacker123'.
-[ADMIN][SUCCESS][25/05/2026 19:55:21] LOGIN: Admin with the name 'gnahk' has successfully logged in.
-[ADMIN][SUCCESS][25/05/2026 19:55:24] LOGIN: Admin with the name 'gnahk' has successfully logged in.
-[MANAGE][SUCCESS][25/05/2026 20:05:57] LOGIN: Manage with the name 'gnahk' has successfully logged in.
-[MANAGE][SUCCESS][25/05/2026 20:05:58] LOGIN: Manage with the name 'gnahk' has successfully logged in.
-[MANAGE][SUCCESS][25/05/2026 20:06:00] LOGIN: Manage with the name 'gnahk' has successfully logged in.
-[ADMIN][SUCCESS][25/05/2026 20:19:52] LOGIN: Admin with the name 'gnahk' has successfully logged in.
-[MANAGE][SUCCESS][25/05/2026 20:20:12] LOGIN: Manage with the name 'gnahk' has successfully logged in.
-[RESIDENT][ERROR][25/05/2026 20:21:11] LOGIN: The Resident with the name 'gnahk' attempted to log in with the password '123123123'.
-[RESIDENT][SUCCESS][25/05/2026 20:53:04] LOGIN: Resident with the name 'gnahk' has successfully logged in.
-[RESIDENT][SUCCESS][25/05/2026 20:53:05] LOGIN: Resident with the name 'gnahk' has successfully logged in.
-[RESIDENT][SUCCESS][25/05/2026 20:53:05] LOGIN: Resident with the name 'gnahk' has successfully logged in.
-[RESIDENT][SUCCESS][25/05/2026 20:53:06] LOGIN: Resident with the name 'gnahk' has successfully logged in.
-[MANAGE][ERROR][25/05/2026 21:06:44] LOGIN: The Manage with the name 'gnahk' attempted to log in with the password 'gnahk1231'.
-[MANAGE][ERROR][25/05/2026 21:06:47] LOGIN: The Manage with the name 'gnahk' attempted to log in with the password 'gnahk1231'.
-[ADMIN][ERROR][27/05/2026 16:45:42] LOGIN: The Admin with the name 'gnahk' attempted to log in with the password 'gnahk1234'.
-[ADMIN][SUCCESS][27/05/2026 16:46:31] LOGIN: Admin with the name 'gnahk' has successfully logged in.
-[MANAGE][SUCCESS][27/05/2026 16:49:50] LOGIN: Manage with the name 'gnahk' has successfully logged in.
-[ADMIN][SUCCESS][30/05/2026 16:32:19] LOGIN: Admin with the name 'gnahk' has successfully logged in.
-[MANAGE][SUCCESS][30/05/2026 16:40:58] LOGIN: Manage with the name 'Khang' has successfully logged in.
-[MANAGE][ERROR][30/05/2026 16:45:21] LOGIN: The Manage with the name 'Khang' attempted to log in with the password 'Abcd123@a'.
-[MANAGE][SUCCESS][30/05/2026 16:45:25] LOGIN: Manage with the name 'Khang' has successfully logged in.
-[MANAGE][SUCCESS][30/05/2026 16:48:34] LOGIN: Manage with the name 'Khang' has successfully logged in.
-[MANAGE][SUCCESS][30/05/2026 16:51:35] LOGIN: Manage with the name 'gnahk' has successfully logged in.
-[MANAGE][SUCCESS][30/05/2026 16:58:01] LOGIN: Manage with the name 'gnahk' has successfully logged in.
-[MANAGE][SUCCESS][30/05/2026 16:59:27] LOGIN: Manage with the name 'gnahk' has successfully logged in.
-[RESIDENT][ERROR][30/05/2026 17:00:04] LOGIN: The Resident with the name 'gnahk' attempted to log in with the password 'Abcd123@'.
-[RESIDENT][ERROR][30/05/2026 17:00:08] LOGIN: The Resident with the name 'gnahk' attempted to log in with the password 'Abcd1234@'.
-[RESIDENT][SUCCESS][30/05/2026 17:00:55] LOGIN: Resident with the name 'gnahk2' has successfully logged in.
-[RESIDENT][ERROR][30/05/2026 17:01:27] LOGIN: The Resident with the name 'gnahk' attempted to log in with the password 'Gnahk7753@'.
-[RESIDENT][SUCCESS][30/05/2026 17:01:34] LOGIN: Resident with the name 'gnahk2' has successfully logged in.
-[RESIDENT][ERROR][30/05/2026 17:04:25] LOGIN: The Resident with the name 'gnahk' attempted to log in with the password 'Gnahk7753@'.
-[RESIDENT][SUCCESS][30/05/2026 17:04:30] LOGIN: Resident with the name 'gnahk2' has successfully logged in.
-[RESIDENT][SUCCESS][30/05/2026 17:07:48] LOGIN: Resident with the name 'gnahk2' has successfully logged in.
-[ADMIN][SUCCESS][30/05/2026 17:08:22] LOGIN: Admin with the name 'Khang' has successfully logged in.
-[MANAGE][SUCCESS][30/05/2026 17:08:43] LOGIN: Manage with the name 'gnahk' has successfully logged in.
-[RESIDENT][ERROR][30/05/2026 17:10:16] LOGIN: The Resident with the name 'gnahk' attempted to log in with the password 'Gnahk7753@'.
-[RESIDENT][SUCCESS][30/05/2026 17:10:21] LOGIN: Resident with the name 'gnahk2' has successfully logged in.
+[ADMIN][THẤT BẠI][31/05/2026 09:17:57] Đăng nhập: Người dùng với username là 'gnahk' đã cố gắn đăng nhập tài khoản Admin với mật khẩu 'Abcd123@'.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:18:20] Đăng nhập: Admin với username là 'duybao' đã đăng nhập thành công.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:19:13] Đổi username: Admin 'duybao' đã đổi username của bản thân thành 'gnahk07'.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:23:50] Đổi tên: Admin 'gnahk07' đã đổi tên bản thân từ 'Nguyễn Văn Tuấn Khang' thành 'Nguyễn Văn Tuấn Khang'.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:24:06] Đổi mật khẩu: Admin 'gnahk07' đã đổi mật khẩu bản thân từ 'Abcd123@' thành 'Abcd321@'.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:24:13] Đổi số điện thoại: Admin 'gnahk07' đã đổi số điện thoại bản thân từ '0123536938' thành '0912332112'.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:26:25] Đăng nhập: Quản lý với username 'gnahk' đã đăng nhập thành công.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:26:50] Đổi username: Quản lý 'gnahk' đã đổi username của bản thân thành 'gnahk07'.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:26:59] Đổi tên: Quản lý 'gnahk07' đã đổi tên bản thân từ 'Văn a' thành 'Nguyễn Văn Tuấn Khang'
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:27:10] Đổi mật khẩu: Quản lý 'gnahk07' đã đổi mật khẩu từ 'Abcd123@' thành 'Abcd321@'
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:27:19] Đổi số điện thoại: Quản lý 'gnahk07' đã đổi số điện thoại bản thân từ '0912332112' thành '0912332112'
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:30:11] Đăng nhập: Quản lý với username 'gnahk07' đã đăng nhập thành công.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:32:31] Đăng nhập: Admin với username là 'gnahk07' đã đăng nhập thành công.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:33:05] Đổi username: Admin 'gnahk07' đã đổi username của bản thân thành 'gnahk1'.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:33:16] Đổi tên: Admin 'gnahk1' đã đổi tên bản thân từ 'Nguyễn Văn Tuấn Khang' thành 'Nguyễn Văn A'.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:33:27] Đổi mật khẩu: Admin 'gnahk1' đã đổi mật khẩu bản thân từ 'Abcd321@' thành 'Abcd123@'.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:33:35] Đổi số điện thoại: Admin 'gnahk1' đã đổi số điện thoại bản thân từ '0912332112' thành '0123321121'.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:35:27] Đăng nhập: Admin với username là 'gnahk1' đã đăng nhập thành công.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:36:23] Tạo tài khoản: Admin 'gnahk1' đã tạo tài khoản cho quản lý với username là 'gnahk1'.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:37:40] Đổi thông tin: Admin 'gnahk1' đã đổi thông tin của quản lý 'gnahk1'.
+[ADMIN][THẤT BẠI][31/05/2026 09:38:14] Xóa quản lý: Admin 'gnahk1' đã xóa thất bại quản lý với username là 'gnahk07'.
+[ADMIN][THẤT BẠI][31/05/2026 09:46:26] Đăng nhập: Người dùng với username là 'gnahk' đã cố gắn đăng nhập tài khoản Admin với mật khẩu 'Abcd123@'.
+[ADMIN][THẤT BẠI][31/05/2026 09:46:29] Đăng nhập: Người dùng với username là 'gnahk07' đã cố gắn đăng nhập tài khoản Admin với mật khẩu 'Abcd123@'.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:46:33] Đăng nhập: Admin với username là 'gnahk1' đã đăng nhập thành công.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:46:48] Xóa quản lý: Admin 'gnahk1' đã xóa thành công quản lý với username là 'gnahk2'.
+[ADMIN][THÀNH CÔNG][31/05/2026 09:47:16] Xóa quản lý: Admin 'gnahk1' đã xóa thành công quản lý với username là 'gnahk12'.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:48:28] Đăng nhập: Quản lý với username 'gnahk07' đã đăng nhập thành công.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:50:14] Đổi username: Quản lý 'gnahk07' đã đổi username của bản thân thành 'gnahk'.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:50:26] Đổi tên: Quản lý 'gnahk' đã đổi tên bản thân từ 'Nguyễn Văn Tuấn Khang' thành 'Nguyễn Văn AN'
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:50:54] Đổi mật khẩu: Quản lý 'gnahk' đã đổi mật khẩu từ 'Abcd123@' thành 'Abcd1234@'
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:51:05] Đổi số điện thoại: Quản lý 'gnahk' đã đổi số điện thoại bản thân từ '0912332112' thành '0112312312'
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:51:52] Tạo tài khoản: Quản lý 'gnahk' đã tạo tài khoản cho cư dân với username là 'gnahk07' ở phòng P104.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:53:09] Đổi thông tin: Quản lý 'gnahk' đã đổi thông tin của cư dân 'gnahk07'.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:53:32] Xóa cư dân: Quản lý 'gnahk' đã xóa thành công cư dân với username là 'gnahk'.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 09:56:15] Tạo hóa đơn: Quản lý 'gnahk' tạo hóa đơn cho P104 với tổng tiền là 10525000 cho tháng 05/2026
+[CƯ DÂN][THÀNH CÔNG][31/05/2026 09:57:03] Đăng nhập: Cư dân với username 'gnahk07' đã đăng nhập thành công.
+[CƯ DÂN][THẤT BẠI][31/05/2026 10:01:23] Đặng nhập: Người dùng với username là 'gnahk07' đã cố gắn đăng nhập tài khoản cư dân với mật khẩu 'Abcd1234@'.
+[CƯ DÂN][THÀNH CÔNG][31/05/2026 10:01:30] Đăng nhập: Cư dân với username 'gnahk07' đã đăng nhập thành công.
+[CƯ DÂN][THÀNH CÔNG][31/05/2026 10:01:49] Đổi số điện thoại: Cư dân 'gnahk07' đã tự đổi số điện thoại của mình từ '0987789987' thành '0987987987'
+[CƯ DÂN][THÀNH CÔNG][31/05/2026 10:02:06] Đổi mật khẩu: Cư dân 'gnahk07' đã đổi mật khẩu từ 'Abcd123@' thành '123Abcd@'
