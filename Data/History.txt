@@ -38,3 +38,21 @@
 [CƯ DÂN][THÀNH CÔNG][31/05/2026 10:01:30] Đăng nhập: Cư dân với username 'gnahk07' đã đăng nhập thành công.
 [CƯ DÂN][THÀNH CÔNG][31/05/2026 10:01:49] Đổi số điện thoại: Cư dân 'gnahk07' đã tự đổi số điện thoại của mình từ '0987789987' thành '0987987987'
 [CƯ DÂN][THÀNH CÔNG][31/05/2026 10:02:06] Đổi mật khẩu: Cư dân 'gnahk07' đã đổi mật khẩu từ 'Abcd123@' thành '123Abcd@'
+[ADMIN][THÀNH CÔNG][31/05/2026 11:04:38] Đăng nhập: Admin với username là 'admin' đã đăng nhập thành công.
+[ADMIN][THÀNH CÔNG][31/05/2026 11:04:59] Đổi username: Admin 'admin' đã đổi username của bản thân thành 'gnahk'.
+[ADMIN][THÀNH CÔNG][31/05/2026 11:05:18] Đổi mật khẩu: Admin 'gnahk' đã đổi mật khẩu bản thân từ 'Admin123@' thành 'Abcd123@'.
+[ADMIN][THÀNH CÔNG][31/05/2026 11:06:32] Tạo tài khoản: Admin 'gnahk' đã tạo tài khoản cho quản lý với username là 'duybao'.
+[ADMIN][THÀNH CÔNG][31/05/2026 11:07:00] Đổi thông tin: Admin 'gnahk' đã đổi thông tin của quản lý 'duybao'.
+[QUẢN LÝ][THẤT BẠI][31/05/2026 11:07:41] Đăng nhập: Người dùng với username là 'duybao' đã cố gắn đăng nhập tài khoản quản lý với mật khẩu 'Duybao1234@'.
+[QUẢN LÝ][THẤT BẠI][31/05/2026 11:07:46] Đăng nhập: Người dùng với username là 'duybao' đã cố gắn đăng nhập tài khoản quản lý với mật khẩu 'Duybao123@'.
+[QUẢN LÝ][THẤT BẠI][31/05/2026 11:07:54] Đăng nhập: Người dùng với username là 'duybao' đã cố gắn đăng nhập tài khoản quản lý với mật khẩu 'Abcd1234@'.
+[QUẢN LÝ][THẤT BẠI][31/05/2026 11:07:59] Đăng nhập: Người dùng với username là 'duybao' đã cố gắn đăng nhập tài khoản quản lý với mật khẩu 'Abcd123@'.
+[QUẢN LÝ][THẤT BẠI][31/05/2026 11:08:04] Đăng nhập: Người dùng với username là 'duybao07' đã cố gắn đăng nhập tài khoản quản lý với mật khẩu 'Abcd123@'.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 11:08:26] Đăng nhập: Quản lý với username 'duybao07' đã đăng nhập thành công.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 11:09:21] Tạo tài khoản: Quản lý 'duybao07' đã tạo tài khoản cho cư dân với username là 'vanan' ở phòng P101.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 11:10:04] Đổi thông tin: Quản lý 'duybao07' đã đổi thông tin của cư dân 'vanan'.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 11:10:52] Tạo hóa đơn: Quản lý 'duybao07' tạo hóa đơn cho P101 với tổng tiền là 10469500 cho tháng 05/2026.
+[CƯ DÂN][THÀNH CÔNG][31/05/2026 11:11:20] Đăng nhập: Cư dân với username 'vanan' đã đăng nhập thành công.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 11:21:09] Đăng nhập: Quản lý với username 'manage' đã đăng nhập thành công.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 11:21:43] Tạo tài khoản: Quản lý 'manage' đã tạo tài khoản cho cư dân với username là 'vanan' ở phòng P101.
+[QUẢN LÝ][THÀNH CÔNG][31/05/2026 11:21:51] Đổi thông tin: Quản lý 'manage' đã đổi thông tin của cư dân 'vanan'.

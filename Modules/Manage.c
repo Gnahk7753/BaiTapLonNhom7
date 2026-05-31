@@ -1770,7 +1770,7 @@ void editResidentInfo(char manage[]) {
                                 continue;
                             }
 
-                            //Kiểm tra CCCD nếu có nhập
+                            //Kiểm tra CCCD (có thể không có)
                             if (strlen(CCCD) > 0) {
                                 if (checkDuplicateCCCD(CCCD) && strcmp(CCCD, oldCCCD) != 0) {
                                     ef = 4;
@@ -1782,10 +1782,12 @@ void editResidentInfo(char manage[]) {
                                 }
                             }
 
-                            //Kiểm tra số điện thoại
-                            if (checkPhoneNumber(phone) == 0) {
-                                ef = 5;
-                                continue;
+                            //Kiểm tra số điện thoại (có thể không có)
+                            if(strlen(phone) != 0) {
+                                if(checkPhoneNumber(phone) == 0) {
+                                    fail = 5;
+                                    continue;
+                                }
                             }
 
                             //Xác định đường dẫn mới nếu username thay đổi
