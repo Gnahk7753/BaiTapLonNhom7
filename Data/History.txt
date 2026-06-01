@@ -56,14 +56,3 @@
 [QUẢN LÝ][THÀNH CÔNG][31/05/2026 11:21:09] Đăng nhập: Quản lý với username 'manage' đã đăng nhập thành công.
 [QUẢN LÝ][THÀNH CÔNG][31/05/2026 11:21:43] Tạo tài khoản: Quản lý 'manage' đã tạo tài khoản cho cư dân với username là 'vanan' ở phòng P101.
 [QUẢN LÝ][THÀNH CÔNG][31/05/2026 11:21:51] Đổi thông tin: Quản lý 'manage' đã đổi thông tin của cư dân 'vanan'.
-[ADMIN][THÀNH CÔNG][01/06/2026 07:30:58] Đăng nhập: Admin với username là 'admin' đã đăng nhập thành công.
-[ADMIN][THÀNH CÔNG][01/06/2026 07:37:34] Đăng nhập: Admin với username là 'admin' đã đăng nhập thành công.
-[QUẢN LÝ][THÀNH CÔNG][01/06/2026 07:38:40] Đăng nhập: Quản lý với username 'manage' đã đăng nhập thành công.
-[QUẢN LÝ][THÀNH CÔNG][01/06/2026 07:42:57] Đăng nhập: Quản lý với username 'manage' đã đăng nhập thành công.
-[QUẢN LÝ][THÀNH CÔNG][01/06/2026 07:43:45] Tạo tài khoản: Quản lý 'manage' đã tạo tài khoản cho cư dân với username là 'resident' ở phòng P101.
-[CƯ DÂN][THÀNH CÔNG][01/06/2026 07:44:03] Đăng nhập: Cư dân với username 'resident' đã đăng nhập thành công.
-[CƯ DÂN][THÀNH CÔNG][01/06/2026 09:50:27] Đăng nhập: Cư dân với username 'resident' đã đăng nhập thành công.
-[QUẢN LÝ][THÀNH CÔNG][01/06/2026 09:52:31] Đăng nhập: Quản lý với username 'manage' đã đăng nhập thành công.
-[QUẢN LÝ][THÀNH CÔNG][01/06/2026 09:53:57] Tạo hóa đơn: Quản lý 'manage' tạo hóa đơn cho P101 với tổng tiền là 10762000 cho tháng 05/2026.
-[ADMIN][THẤT BẠI][01/06/2026 09:54:42] Đăng nhập: Người dùng với username là 'admin' đã cố gắn đăng nhập tài khoản Admin với mật khẩu 'Admi123@'.
-[ADMIN][THÀNH CÔNG][01/06/2026 09:54:51] Đăng nhập: Admin với username là 'admin' đã đăng nhập thành công.
