@@ -65,10 +65,18 @@ void printLoginForm(char username[], char password[], int currentField, int *fai
     //Ô mật khẩu
     if(currentField == 1) {
         setColor(11);
-        printf("   >> Mật khẩu : %s\n", password);
+        printf("   >> Mật khẩu : ");
+        for(int i = 0; i < strlen(password); i++) {
+            printf("*");
+        }
         setColor(7);
+        printf("\n");
     } else {
-        printf("       Mật khẩu : %s\n", password);
+        printf("       Mật khẩu : ");
+        for(int i = 0; i < strlen(password); i++) {
+            printf("*");
+        }
+        printf("\n");
     }
 
     //Ô đăng nhập
